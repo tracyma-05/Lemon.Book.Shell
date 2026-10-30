@@ -526,3 +526,6 @@ work/
 # The full book fonts: scripts/fonts/subset-fonts.py fetches them (pinned and checked); only the subsets are kept.
 assets/fonts/*.ttf
 assets/fonts/*.part
+
+# The local CodeGraph index (codegraph init).
+.codegraph/
