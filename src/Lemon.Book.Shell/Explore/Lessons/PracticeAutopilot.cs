@@ -67,7 +67,7 @@ public sealed class PracticeAutopilot : IDisposable
         _done = 0;
     }
 
-    internal void Tick(double seconds)
+    public void Tick(double seconds)
     {
         if (!_isPracticing() || (_lesson.IsActive && !_lesson.IsDone))
         {

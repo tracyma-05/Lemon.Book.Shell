@@ -360,7 +360,7 @@ public sealed partial class LessonPlayer : ObservableObject, IDisposable
     }
 
     /// <summary>Moves the lesson on by <paramref name="seconds"/>: subtitles, the end of a clip, the gap, a task done.</summary>
-    internal void Tick(double seconds)
+    public void Tick(double seconds)
     {
         if (State is LessonState.Idle or LessonState.Done) return;
         var step = _steps[Index];
