@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- What the books' Windows and macOS heads share: the narration players and signing in through the browser. -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Lemon.Book.Shell.Desktop</RootNamespace>
+    <!-- The narration players call the operating system through generated P/Invoke. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PackageId>Lemon.Book.Shell.Desktop</PackageId>
+    <Description>The Lemon books' desktop pieces: narration players for Windows and macOS, and signing in through the system browser.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lemon.Book.Shell\Lemon.Book.Shell.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <!--
+    What the books' web heads share: the narration player, settings in localStorage, signing in by redirect, and the
+    page's scripts. The Razor SDK makes wwwroot static web assets, so a book serves them at
+    _content/Lemon.Book.Shell.Browser/ (download-progress.js, wake-lock.js, narration.js).
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-browser</TargetFramework>
+    <RootNamespace>Lemon.Book.Shell.Browser</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PackageId>Lemon.Book.Shell.Browser</PackageId>
+    <Description>The Lemon books' web pieces: narration through Web Audio, settings in localStorage, sign-in by redirect, and the splash's download progress.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lemon.Book.Shell\Lemon.Book.Shell.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,253 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:theming="using:Lemon.Book.Shell.Infrastructures.Theming">
+    <!--
+        The look every Lemon book shares, after FluentTheme in the book's App.axaml:
+        <StyleInclude Source="avares://Lemon.Book.Shell/Styles/Book.axaml" />
+        A book sets its own resources (its accent, its cover) in Application.Resources, which come first.
+    -->
+    <Styles.Resources>
+        <ResourceDictionary>
+            <!--
+                Paper and ink for the light, dark and eye-care (护眼) themes. The accent brushes are set from the reader's colour choice
+                (Infrastructures/Theming/BookTheme); these are the defaults. Use them with DynamicResource so a change
+                of theme or colour reaches every page.
+            -->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="InkBrush" Color="#2B2622" />
+                    <SolidColorBrush x:Key="BodyInkBrush" Color="#3A332D" />
+                    <SolidColorBrush x:Key="FaintInkBrush" Color="#8C8073" />
+                    <SolidColorBrush x:Key="ChipBorderBrush" Color="#D2C8B6" />
+                    <SolidColorBrush x:Key="RuleBrush" Color="#D9D0BE" />
+                    <SolidColorBrush x:Key="TintBrush" Color="#0D2B2622" />
+                    <SolidColorBrush x:Key="FlyoutPaperBrush" Color="#FBF7EF" />
+                    <SolidColorBrush x:Key="BookPaperBrush" Color="#FBF7EE" />
+                    <SolidColorBrush x:Key="BookPageEdgeBrush" Color="#D9D0BE" />
+                    <LinearGradientBrush x:Key="BookTableBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+                        <GradientStop Color="#4A3527" Offset="0" />
+                        <GradientStop Color="#2A1D15" Offset="1" />
+                    </LinearGradientBrush>
+                    <SolidColorBrush x:Key="AccentBrush" Color="#B5532E" />
+                    <SolidColorBrush x:Key="AccentSoftBrush" Color="#22B5532E" />
+                    <SolidColorBrush x:Key="AccentFaintBrush" Color="#14B5532E" />
+                    <SolidColorBrush x:Key="AccentSelectionBrush" Color="#55B5532E" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="InkBrush" Color="#EEE6D8" />
+                    <SolidColorBrush x:Key="BodyInkBrush" Color="#D9CFBF" />
+                    <SolidColorBrush x:Key="FaintInkBrush" Color="#A3978A" />
+                    <SolidColorBrush x:Key="ChipBorderBrush" Color="#4E453B" />
+                    <SolidColorBrush x:Key="RuleBrush" Color="#463E35" />
+                    <SolidColorBrush x:Key="TintBrush" Color="#14FFFFFF" />
+                    <SolidColorBrush x:Key="FlyoutPaperBrush" Color="#2A2520" />
+                    <SolidColorBrush x:Key="BookPaperBrush" Color="#25211C" />
+                    <SolidColorBrush x:Key="BookPageEdgeBrush" Color="#3D362E" />
+                    <LinearGradientBrush x:Key="BookTableBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+                        <GradientStop Color="#1C1511" Offset="0" />
+                        <GradientStop Color="#0E0A08" Offset="1" />
+                    </LinearGradientBrush>
+                    <SolidColorBrush x:Key="AccentBrush" Color="#E38A62" />
+                    <SolidColorBrush x:Key="AccentSoftBrush" Color="#33E38A62" />
+                    <SolidColorBrush x:Key="AccentFaintBrush" Color="#1FE38A62" />
+                    <SolidColorBrush x:Key="AccentSelectionBrush" Color="#66E38A62" />
+                </ResourceDictionary>
+                <!-- 护眼: muted green paper and softer ink (lower contrast and less glare than the white paper). -->
+                <ResourceDictionary x:Key="{x:Static theming:BookTheme.EyeCare}">
+                    <SolidColorBrush x:Key="InkBrush" Color="#2E3A2B" />
+                    <SolidColorBrush x:Key="BodyInkBrush" Color="#38452F" />
+                    <SolidColorBrush x:Key="FaintInkBrush" Color="#6B7A63" />
+                    <SolidColorBrush x:Key="ChipBorderBrush" Color="#B3C7AA" />
+                    <SolidColorBrush x:Key="RuleBrush" Color="#BCCFB3" />
+                    <SolidColorBrush x:Key="TintBrush" Color="#0F2E3A2B" />
+                    <SolidColorBrush x:Key="FlyoutPaperBrush" Color="#E1EEDA" />
+                    <SolidColorBrush x:Key="BookPaperBrush" Color="#DCEBD4" />
+                    <SolidColorBrush x:Key="BookPageEdgeBrush" Color="#BCCFB3" />
+                    <LinearGradientBrush x:Key="BookTableBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+                        <GradientStop Color="#3A4632" Offset="0" />
+                        <GradientStop Color="#1F271A" Offset="1" />
+                    </LinearGradientBrush>
+                    <SolidColorBrush x:Key="AccentBrush" Color="#A04A29" />
+                    <SolidColorBrush x:Key="AccentSoftBrush" Color="#22A04A29" />
+                    <SolidColorBrush x:Key="AccentFaintBrush" Color="#14A04A29" />
+                    <SolidColorBrush x:Key="AccentSelectionBrush" Color="#55A04A29" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <SolidColorBrush x:Key="CoverGoldBrush" Color="#E9C46A" />
+            <LinearGradientBrush x:Key="CoverBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#22345C" Offset="0" />
+                <GradientStop Color="#0E1630" Offset="1" />
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <StyleInclude Source="avares://Lemon.Book.Shell/Styles/Explore.axaml" />
+
+    <!-- Page typography -->
+    <Style Selector=":is(TextBlock).kicker">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="LetterSpacing" Value="1.2" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+    </Style>
+    <Style Selector=":is(TextBlock).pageTitle">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="{DynamicResource InkBrush}" />
+        <Setter Property="Margin" Value="0,6,0,18" />
+    </Style>
+    <Style Selector=":is(TextBlock).body">
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="LineHeight" Value="28" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Foreground" Value="{DynamicResource BodyInkBrush}" />
+    </Style>
+    <Style Selector=":is(TextBlock).folio">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{DynamicResource FaintInkBrush}" />
+        <Setter Property="Margin" Value="0,8,0,0" />
+    </Style>
+
+    <!-- Toolbar above the book -->
+    <Style Selector="Border.toolbar">
+        <Setter Property="Background" Value="#1F1510" />
+        <Setter Property="Padding" Value="12,6" />
+    </Style>
+    <Style Selector="Border.toolbar :is(TextBlock).toolbarTitle">
+        <Setter Property="Foreground" Value="#F3E9DA" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <!--
+        Reading text on the pages can be selected and copied. Its menu (copy, select all, add to notes) is the
+        book's own, opened by MainView, so the theme's default one is switched off here.
+    -->
+    <Style Selector="SelectableTextBlock">
+        <Setter Property="SelectionBrush" Value="{DynamicResource AccentSelectionBrush}" />
+        <Setter Property="ContextFlyout" Value="{x:Null}" />
+        <Setter Property="Cursor" Value="IBeam" />
+    </Style>
+
+    <!-- The update banner under the title bar -->
+    <Style Selector="Border.updateBanner">
+        <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+        <Setter Property="Padding" Value="16,8" />
+    </Style>
+    <Style Selector="Border.updateBanner TextBlock.bannerText">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="13.5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="Border.updateBanner Button.banner, Border.updateBanner Button.bannerPrimary">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="#33FFFFFF" />
+        <Setter Property="Padding" Value="12,4" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="Border.updateBanner Button.bannerPrimary">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Border.updateBanner ProgressBar">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="#40FFFFFF" />
+    </Style>
+
+    <!-- Minimize, maximize and close, drawn by the book on Windows and Linux (macOS keeps its own). -->
+    <Style Selector="Button.caption">
+        <Setter Property="Width" Value="46" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Foreground" Value="#F3E9DA" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="Bg" Background="{TemplateBinding Background}">
+                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Button.caption PathIcon">
+        <Setter Property="Width" Value="14" />
+        <Setter Property="Height" Value="14" />
+    </Style>
+    <Style Selector="Button.caption:pointerover /template/ Border#Bg">
+        <Setter Property="Background" Value="#26FFFFFF" />
+    </Style>
+    <Style Selector="Button.caption.close:pointerover /template/ Border#Bg">
+        <Setter Property="Background" Value="#E81123" />
+    </Style>
+
+    <!-- The pet's panel (Lemon.Pet.Core's, in its own paper) beside the floating pet: no room taken round it. -->
+    <Style Selector="FlyoutPresenter.petPanel">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MaxWidth" Value="NaN" />
+        <Setter Property="MaxHeight" Value="NaN" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ChipBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- A phone's width (MainView adds .narrow): the toolbar keeps its buttons' icons and drops their words. -->
+    <Style Selector=".narrow Border.toolbar :is(TextBlock).toolbarLabel, .narrow Border.toolbar :is(TextBlock).toolbarTitle">
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="Border.toolbar StackPanel.toolbarButtons > :is(Button)">
+        <Setter Property="Foreground" Value="#F3E9DA" />
+        <Setter Property="Background" Value="#26FFFFFF" />
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+    <!-- On a phone the icons sit a little closer, so all the buttons fit on a 390 px screen. -->
+    <Style Selector=".narrow Border.toolbar StackPanel.toolbarButtons">
+        <Setter Property="Spacing" Value="3" />
+    </Style>
+    <Style Selector=".narrow Border.toolbar StackPanel.toolbarButtons > :is(Button)">
+        <Setter Property="MinWidth" Value="36" />
+    </Style>
+    <Style Selector="Border.toolbar StackPanel.toolbarButtons > :is(Button):pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#40FFFFFF" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
+    <!-- A switch that is on (读给我听): lit in the accent colour. -->
+    <Style Selector="Border.toolbar StackPanel.toolbarButtons > ToggleButton:checked /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+        <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
+
+    <!-- Covers -->
+    <Style Selector=":is(TextBlock).coverTitle">
+        <Setter Property="FontSize" Value="44" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{StaticResource CoverGoldBrush}" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector=":is(TextBlock).coverText">
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="Foreground" Value="#E6EAF2" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="Button.coverOpen">
+        <Setter Property="Background" Value="{StaticResource CoverGoldBrush}" />
+        <Setter Property="Foreground" Value="#1A2340" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Padding" Value="22,10" />
+        <Setter Property="CornerRadius" Value="22" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.coverOpen:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#F2D58C" />
+        <Setter Property="Foreground" Value="#1A2340" />
+    </Style>
+</Styles>

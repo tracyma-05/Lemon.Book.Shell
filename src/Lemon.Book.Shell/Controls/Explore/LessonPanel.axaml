@@ -1,0 +1,128 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lessons="using:Lemon.Book.Shell.Explore.Lessons"
+             xmlns:loc="using:Lemon.Book.Shell.Infrastructures.Localization"
+             x:Class="Lemon.Book.Shell.Controls.Explore.LessonPanel"
+             x:DataType="lessons:LessonPlayer"
+             IsVisible="{Binding IsActive}">
+    <!--
+        A walkthrough's subtitle strip over a diagram plate: the sentence being spoken, the answers to a question, and
+        the step controls. DataContext is a LessonPlayer.
+    -->
+    <UserControl.Styles>
+        <!-- An answer: a pill that turns green when right and red when picked wrong. -->
+        <Style Selector="Button.choice">
+            <Setter Property="Template" Value="{StaticResource PillTemplate}" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="Padding" Value="16,7" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Foreground" Value="{StaticResource SpaceText}" />
+            <Setter Property="Background" Value="#1AFFFFFF" />
+            <Setter Property="BorderBrush" Value="#40FFFFFF" />
+        </Style>
+        <Style Selector="Button.choice:pointerover /template/ Border#Chrome">
+            <Setter Property="Background" Value="#2EFFFFFF" />
+        </Style>
+        <Style Selector="Button.choice:focus-visible /template/ Border#Chrome">
+            <Setter Property="BorderBrush" Value="#E6FFFFFF" />
+        </Style>
+        <Style Selector="Button.choice.right">
+            <Setter Property="Background" Value="#3352C27A" />
+            <Setter Property="BorderBrush" Value="#CC6FD99A" />
+        </Style>
+        <Style Selector="Button.choice.wrong">
+            <Setter Property="Background" Value="#33E06464" />
+            <Setter Property="BorderBrush" Value="#CCF08A8A" />
+        </Style>
+    </UserControl.Styles>
+
+    <Border MaxWidth="640"
+            Padding="16,10,10,6"
+            Background="#E60B1019"
+            BorderBrush="#665AA9FF"
+            BorderThickness="1"
+            CornerRadius="16">
+        <StackPanel>
+            <!-- What is being said -->
+            <TextBlock Text="{Binding Subtitle}"
+                       IsVisible="{Binding ShowSubtitle}"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       FontSize="16"
+                       LineHeight="24"
+                       Margin="0,0,0,6"
+                       Foreground="{StaticResource SpaceText}" />
+
+            <!-- The answers to a question -->
+            <ItemsControl ItemsSource="{Binding Choices}"
+                          HorizontalAlignment="Center"
+                          Margin="0,2,0,6"
+                          IsVisible="{Binding IsQuiz}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="lessons:LessonChoice">
+                        <Button Classes="choice"
+                                Classes.right="{Binding IsRight}"
+                                Classes.wrong="{Binding IsWrong}"
+                                Command="{Binding $parent[ItemsControl].((lessons:LessonPlayer)DataContext).AnswerCommand}"
+                                CommandParameter="{Binding}">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <PathIcon Data="{StaticResource Icon.Check}" Width="14" Height="14" IsVisible="{Binding IsRight}" />
+                                <PathIcon Data="{StaticResource Icon.Close}" Width="14" Height="14" IsVisible="{Binding IsWrong}" />
+                                <TextBlock Text="{Binding Text}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Time left to answer (or to try): the answer is shown when it runs out -->
+            <ProgressBar Minimum="0" Maximum="1" Value="{Binding WaitProgress, Mode=OneWay}"
+                         Height="3" MinHeight="3" Margin="40,0,40,8"
+                         Background="#22FFFFFF" Foreground="#7FB2FF"
+                         AutomationProperties.Name="{loc:Localize Lesson_TimeLeft}"
+                         IsVisible="{Binding IsWaiting}" />
+
+            <!-- Where we are, and the step controls -->
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" VerticalAlignment="Center" Spacing="6">
+                    <PathIcon Data="{StaticResource Icon.Voice}" Width="15" Height="15" Foreground="#7FB2FF" />
+                    <TextBlock VerticalAlignment="Center" FontSize="12.5" Text="{Binding StateText}" Foreground="#7FB2FF" />
+                    <TextBlock VerticalAlignment="Center" FontSize="12.5" Text="{Binding StepText}" Foreground="{StaticResource SpaceTextDim}" />
+                </StackPanel>
+
+                <Button DockPanel.Dock="Right" Classes="space" Command="{Binding StopCommand}"
+                        ToolTip.Tip="{loc:Localize Lesson_Stop}" AutomationProperties.Name="{loc:Localize Lesson_Stop}">
+                    <PathIcon Data="{StaticResource Icon.Close}" />
+                </Button>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Classes="space" FontSize="12.5" Command="{Binding SkipCommand}"
+                            Content="{loc:Localize Lesson_Skip}" IsVisible="{Binding IsTryIt}" />
+                    <Button Classes="space" FontSize="12.5" Command="{Binding RestartCommand}"
+                            Content="{loc:Localize Lesson_Restart}" IsVisible="{Binding IsDone}" />
+                    <Button Classes="space" Command="{Binding PreviousCommand}"
+                            ToolTip.Tip="{loc:Localize Lesson_Previous}" AutomationProperties.Name="{loc:Localize Lesson_Previous}">
+                        <PathIcon Data="{StaticResource Icon.Previous}" />
+                    </Button>
+                    <Button Classes="space" Command="{Binding PauseResumeCommand}" IsEnabled="{Binding CanPause}"
+                            ToolTip.Tip="{loc:Localize Lesson_PauseResume}" AutomationProperties.Name="{loc:Localize Lesson_PauseResume}">
+                        <Panel>
+                            <PathIcon Data="{StaticResource Icon.Pause}" IsVisible="{Binding !IsPaused}" />
+                            <PathIcon Data="{StaticResource Icon.Play}" IsVisible="{Binding IsPaused}" />
+                        </Panel>
+                    </Button>
+                    <Button Classes="space" Command="{Binding NextCommand}"
+                            ToolTip.Tip="{loc:Localize Lesson_Next}" AutomationProperties.Name="{loc:Localize Lesson_Next}">
+                        <PathIcon Data="{StaticResource Icon.Next}" />
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

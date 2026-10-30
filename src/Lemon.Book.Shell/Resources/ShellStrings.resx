@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <data name="Account_Callback_Done" xml:space="preserve">
+    <value>登录好了！可以关掉这个网页，回到柠檬绘本。</value>
+  </data>
+  <data name="Account_Callback_Failed" xml:space="preserve">
+    <value>没有登录成功，请回到柠檬绘本再试一次。</value>
+  </data>
+  <data name="Account_ChildIs" xml:space="preserve">
+    <value>同步的是：{0} 的进度</value>
+  </data>
+  <data name="Account_ChildrenFailed" xml:space="preserve">
+    <value>暂时连不上，请稍后再试。</value>
+  </data>
+  <data name="Account_NeedsSignIn" xml:space="preserve">
+    <value>登录已过期，请重新登录。进度仍保存在这台设备上。</value>
+  </data>
+  <data name="Account_NoChild" xml:space="preserve">
+    <value>还没选孩子：进度存在这个账号里。家长可以选一个孩子，每个孩子的进度分开保存。</value>
+  </data>
+  <data name="Account_NoChildren" xml:space="preserve">
+    <value>这个账号里还没有孩子，先添加一个吧。</value>
+  </data>
+  <data name="Account_Offline" xml:space="preserve">
+    <value>暂时连不上，进度先存在这台设备上，稍后再同步。</value>
+  </data>
+  <data name="Account_SignedInAs" xml:space="preserve">
+    <value>已登录：{0}</value>
+  </data>
+  <data name="Account_SignedOut" xml:space="preserve">
+    <value>未登录：读到哪儿、生词本和小游戏都只保存在这台设备上。</value>
+  </data>
+  <data name="Account_SigningIn" xml:space="preserve">
+    <value>正在登录…请在打开的网页里输入用户名和密码。</value>
+  </data>
+  <data name="Account_Someone" xml:space="preserve">
+    <value>这个账号</value>
+  </data>
+  <data name="Account_SyncedAt" xml:space="preserve">
+    <value>已同步 · {0}</value>
+  </data>
+  <data name="Account_Syncing" xml:space="preserve">
+    <value>正在同步…</value>
+  </data>
+  <data name="Bookmarks_Add" xml:space="preserve">
+    <value>给这一页加书签</value>
+  </data>
+  <data name="Bookmarks_Details" xml:space="preserve">
+    <value>第 {0} 页 · {1}添加</value>
+  </data>
+  <data name="Bookmarks_Empty" xml:space="preserve">
+    <value>还没有书签。加了书签的页顶部会挂一条丝带。</value>
+  </data>
+  <data name="Bookmarks_Remove" xml:space="preserve">
+    <value>移除这一页的书签</value>
+  </data>
+  <data name="Bookmarks_RemoveOne" xml:space="preserve">
+    <value>移除书签</value>
+  </data>
+  <data name="Bookmarks_Shortcut" xml:space="preserve">
+    <value>快捷键：Ctrl+D</value>
+  </data>
+  <data name="Bookmarks_Title" xml:space="preserve">
+    <value>书签</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Cover_Open" xml:space="preserve">
+    <value>翻开这本书</value>
+  </data>
+  <data name="Lesson_Done_Text" xml:space="preserve">
+    <value>讲完啦！你可以继续拖动画面、点一点里面的东西自己探索，或者换一个视图再听一段讲解。</value>
+  </data>
+  <data name="Lesson_Next" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+  <data name="Lesson_PauseResume" xml:space="preserve">
+    <value>暂停 / 继续</value>
+  </data>
+  <data name="Lesson_Previous" xml:space="preserve">
+    <value>上一步</value>
+  </data>
+  <data name="Lesson_Restart" xml:space="preserve">
+    <value>从头再听</value>
+  </data>
+  <data name="Lesson_Skip" xml:space="preserve">
+    <value>跳过</value>
+  </data>
+  <data name="Lesson_State_Done" xml:space="preserve">
+    <value>讲解结束</value>
+  </data>
+  <data name="Lesson_State_Paused" xml:space="preserve">
+    <value>已暂停</value>
+  </data>
+  <data name="Lesson_State_Quiz" xml:space="preserve">
+    <value>想一想</value>
+  </data>
+  <data name="Lesson_State_Speaking" xml:space="preserve">
+    <value>讲解中</value>
+  </data>
+  <data name="Lesson_State_TryIt" xml:space="preserve">
+    <value>动手试试</value>
+  </data>
+  <data name="Lesson_Step" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="Lesson_Stop" xml:space="preserve">
+    <value>结束讲解</value>
+  </data>
+  <data name="Lesson_TimeLeft" xml:space="preserve">
+    <value>剩余答题时间</value>
+  </data>
+  <data name="Notes_Add" xml:space="preserve">
+    <value>保存笔记</value>
+  </data>
+  <data name="Notes_Copied" xml:space="preserve">
+    <value>已把全部笔记以 Markdown 格式复制到剪贴板。</value>
+  </data>
+  <data name="Notes_CopyAll" xml:space="preserve">
+    <value>全部复制</value>
+  </data>
+  <data name="Notes_Count" xml:space="preserve">
+    <value>共 {0} 条笔记</value>
+  </data>
+  <data name="Notes_Details" xml:space="preserve">
+    <value>第 {0} 页 · {1}</value>
+  </data>
+  <data name="Notes_Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Notes_Empty" xml:space="preserve">
+    <value>这里还没有笔记。</value>
+  </data>
+  <data name="Notes_Export" xml:space="preserve">
+    <value>导出…</value>
+  </data>
+  <data name="Notes_Export_FileName" xml:space="preserve">
+    <value>柠檬绘本-笔记-{0}.md</value>
+  </data>
+  <data name="Notes_Export_Markdown" xml:space="preserve">
+    <value>Markdown 文档</value>
+  </data>
+  <data name="Notes_Export_Page" xml:space="preserve">
+    <value>{0}（第 {1} 页）</value>
+  </data>
+  <data name="Notes_Export_Summary" xml:space="preserve">
+    <value>导出于 {0} · 共 {1} 条</value>
+  </data>
+  <data name="Notes_Export_Text" xml:space="preserve">
+    <value>纯文本</value>
+  </data>
+  <data name="Notes_Export_Tip" xml:space="preserve">
+    <value>把全部笔记保存为 Markdown 文件</value>
+  </data>
+  <data name="Notes_Export_Title" xml:space="preserve">
+    <value>柠檬绘本 · 笔记</value>
+  </data>
+  <data name="Notes_Exported" xml:space="preserve">
+    <value>已导出到 {0}</value>
+  </data>
+  <data name="Notes_Hint" xml:space="preserve">
+    <value>提示：在页面上选中文字，右键选「加入笔记」即可摘录。</value>
+  </data>
+  <data name="Notes_Open" xml:space="preserve">
+    <value>翻到这一页</value>
+  </data>
+  <data name="Notes_Placeholder" xml:space="preserve">
+    <value>在这一页写点什么…</value>
+  </data>
+  <data name="Notes_Remove" xml:space="preserve">
+    <value>删除笔记</value>
+  </data>
+  <data name="Notes_RemoveQuote" xml:space="preserve">
+    <value>去掉摘录</value>
+  </data>
+  <data name="Notes_ThisPageOnly" xml:space="preserve">
+    <value>只看本页</value>
+  </data>
+  <data name="Notes_Title" xml:space="preserve">
+    <value>笔记</value>
+  </data>
+  <data name="Page_Caption" xml:space="preserve">
+    <value>第 {0} 页</value>
+  </data>
+  <data name="Theme_Accent_Amber" xml:space="preserve">
+    <value>琥珀</value>
+  </data>
+  <data name="Theme_Accent_Indigo" xml:space="preserve">
+    <value>靛蓝</value>
+  </data>
+  <data name="Theme_Accent_Pine" xml:space="preserve">
+    <value>松绿</value>
+  </data>
+  <data name="Theme_Accent_Plum" xml:space="preserve">
+    <value>梅紫</value>
+  </data>
+  <data name="Theme_Accent_Terracotta" xml:space="preserve">
+    <value>赭红</value>
+  </data>
+  <data name="Update_Banner_Download" xml:space="preserve">
+    <value>数学之书 {0} 已发布。下载后关闭本程序，再覆盖安装。</value>
+  </data>
+  <data name="Update_Banner_Install" xml:space="preserve">
+    <value>数学之书 {0} 已发布，「更新并重启」只需几秒钟。</value>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>正在检查…</value>
+  </data>
+  <data name="Update_Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>正在下载更新…</value>
+  </data>
+  <data name="Update_Error_Damaged" xml:space="preserve">
+    <value>下载的安装包已损坏（校验和对不上）。请重试，或手动下载安装。</value>
+  </data>
+  <data name="Update_Error_Download" xml:space="preserve">
+    <value>下载失败（HTTP {0}），请稍后再试。</value>
+  </data>
+  <data name="Update_Error_Http" xml:space="preserve">
+    <value>更新服务器返回错误（HTTP {0}），请稍后再试。</value>
+  </data>
+  <data name="Update_Error_Install" xml:space="preserve">
+    <value>没能自动安装：{0} 请手动下载安装。</value>
+  </data>
+  <data name="Update_Error_Interrupted" xml:space="preserve">
+    <value>下载中断了，请检查网络后重试。</value>
+  </data>
+  <data name="Update_Error_Launch" xml:space="preserve">
+    <value>更新程序没能启动，请手动下载安装。</value>
+  </data>
+  <data name="Update_Error_NoFeed" xml:space="preserve">
+    <value>没有更新地址，请在 设置 → 更新 里填写。</value>
+  </data>
+  <data name="Update_Error_NoPackage" xml:space="preserve">
+    <value>{0} 已发布，但没有适合这台电脑（{1}）的安装包。</value>
+  </data>
+  <data name="Update_Error_NoRelease" xml:space="preserve">
+    <value>还没有发布任何版本。</value>
+  </data>
+  <data name="Update_Error_NotThisApp" xml:space="preserve">
+    <value>安装包里没有 {0}，没法自动安装，请手动下载安装。</value>
+  </data>
+  <data name="Update_Error_NotZip" xml:space="preserve">
+    <value>安装包不是 zip 压缩包，没法自动安装，请手动下载安装。</value>
+  </data>
+  <data name="Update_Error_Offline" xml:space="preserve">
+    <value>连不上更新服务器，请检查网络后重试。</value>
+  </data>
+  <data name="Update_Error_Unreadable" xml:space="preserve">
+    <value>读不懂更新服务器返回的版本信息。</value>
+  </data>
+  <data name="Update_Feed_BuiltIn" xml:space="preserve">
+    <value>这是本版本自带的地址。</value>
+  </data>
+  <data name="Update_Feed_FromFile" xml:space="preserve">
+    <value>这是打包者设置的地址（程序旁边的 update-feed.txt）。</value>
+  </data>
+  <data name="Update_Feed_FromReader" xml:space="preserve">
+    <value>这是你自己设置的地址。</value>
+  </data>
+  <data name="Update_Feed_Invalid" xml:space="preserve">
+    <value>这不是一个能读取更新的地址。</value>
+  </data>
+  <data name="Update_Feed_None" xml:space="preserve">
+    <value>没有更新地址：这份程序不会检查更新。</value>
+  </data>
+  <data name="Update_Feed_Saved" xml:space="preserve">
+    <value>已保存。</value>
+  </data>
+  <data name="Update_InstallAndRestart" xml:space="preserve">
+    <value>更新并重启</value>
+  </data>
+  <data name="Update_Notice_Failed" xml:space="preserve">
+    <value>上次更新没有装上，仍是 {0}。关掉占用程序目录的程序后再试一次。</value>
+  </data>
+  <data name="Update_Notice_Updated" xml:space="preserve">
+    <value>已更新到 {0}。</value>
+  </data>
+  <data name="Update_Progress" xml:space="preserve">
+    <value>正在下载… {0}%（{1} / {2}）</value>
+  </data>
+  <data name="Update_Progress_Unknown" xml:space="preserve">
+    <value>正在下载… {0}</value>
+  </data>
+  <data name="Update_Restarting" xml:space="preserve">
+    <value>正在安装并重启…</value>
+  </data>
+  <data name="Update_Status_Available" xml:space="preserve">
+    <value>新版本 {0} 已发布。</value>
+  </data>
+  <data name="Update_Status_UpToDate" xml:space="preserve">
+    <value>{0} 已是最新版本。</value>
+  </data>
+</root>

@@ -1,0 +1,22 @@
+* text=auto
+*.cs text eol=crlf
+*.axaml text eol=crlf
+*.csproj text eol=crlf
+*.props text eol=crlf
+*.sln text eol=crlf
+*.resx text eol=crlf
+*.sh text eol=lf
+.githooks/* text eol=lf
+*.js text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.png binary
+*.ico binary
+*.otf binary
+*.ttf binary
+*.mp3 binary
+
+# Chapters ported side by side each add lines here: keep both sides' lines.
+src/Lemon.Book.Shell/Contents/ChapterRegistry.cs merge=union
+src/Lemon.Book.Shell/Views/MainView.axaml merge=union

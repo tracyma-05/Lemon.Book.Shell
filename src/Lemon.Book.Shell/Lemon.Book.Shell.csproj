@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The shell every Lemon book shares: the book and its page turn, narration, lessons, bookmarks and notes, settings,
+    localization, themes, updates and sync. A book gives it its pages and calls BookShell.Configure at start.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Lemon.Book.Shell</RootNamespace>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <!-- Native AOT and trimming: every build warns about anything that would break them. -->
+    <IsAotCompatible>true</IsAotCompatible>
+    <PackageId>Lemon.Book.Shell</PackageId>
+    <Description>The shell of the Lemon books: an Avalonia book with page turning, narration, lessons, settings, themes, updates and sync.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Lemon.Book.Shell.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <!-- The pet's models (PetInfo), which the sync server sends: every book shows the child's pet. -->
+    <PackageReference Include="Lemon.Pet.Look" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ShellStrings.resx">
+      <LogicalName>Lemon.Book.Shell.Resources.ShellStrings.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,129 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Lemon.Book.Shell.ViewModels"
+             xmlns:loc="using:Lemon.Book.Shell.Infrastructures.Localization"
+             x:Class="Lemon.Book.Shell.Views.NotesView"
+             x:DataType="vm:NotesViewModel">
+    <!-- The notes, opened from the toolbar: a new note for the reading page, every note, and the export. -->
+    <UserControl.Styles>
+        <Style Selector="Border.quote">
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="BorderThickness" Value="3,0,0,0" />
+            <Setter Property="Padding" Value="10,4" />
+            <Setter Property="Margin" Value="0,4,0,4" />
+            <Setter Property="Background" Value="{DynamicResource AccentFaintBrush}" />
+        </Style>
+        <Style Selector="Border.quote > SelectableTextBlock">
+            <Setter Property="FontSize" Value="12.5" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="MaxLines" Value="6" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="Foreground" Value="{DynamicResource BodyInkBrush}" />
+        </Style>
+        <Style Selector="TextBox.note">
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="MinHeight" Value="64" />
+            <Setter Property="MaxHeight" Value="180" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+        <Style Selector="Button.link">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter Content="{TemplateBinding Content}" Background="Transparent" />
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="Button.link TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="Button.link:pointerover TextBlock">
+            <Setter Property="TextDecorations" Value="Underline" />
+        </Style>
+    </UserControl.Styles>
+
+    <StackPanel>
+        <TextBlock Classes="kicker" Margin="0,12,0,0" Text="{loc:Localize Notes_Title}" />
+
+        <!-- A new note on the reading page -->
+        <TextBlock Classes="note" Margin="0,8,0,4" Text="{Binding CurrentCaption}" />
+        <Border Classes="quote" IsVisible="{Binding HasDraftQuote}">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Classes="link" VerticalAlignment="Top" Margin="8,0,0,0"
+                        Command="{Binding ClearQuoteCommand}"
+                        ToolTip.Tip="{loc:Localize Notes_RemoveQuote}" AutomationProperties.Name="{loc:Localize Notes_RemoveQuote}">
+                    <PathIcon Width="10" Height="10" Foreground="{DynamicResource FaintInkBrush}" Data="{StaticResource Icon.Close}" />
+                </Button>
+                <SelectableTextBlock Text="{Binding DraftQuote}" />
+            </DockPanel>
+        </Border>
+        <TextBox x:Name="DraftBox" Classes="note" Text="{Binding Draft}"
+                 PlaceholderText="{loc:Localize Notes_Placeholder}" AutomationProperties.Name="{loc:Localize Notes_Placeholder}" />
+        <WrapPanel Margin="0,6,0,0">
+            <Button Classes="chip" Command="{Binding AddCommand}" Content="{loc:Localize Notes_Add}" />
+        </WrapPanel>
+        <TextBlock Classes="note" Text="{loc:Localize Notes_Hint}" />
+
+        <Rectangle Height="1" Margin="0,10,0,8" Fill="{DynamicResource ChipBorderBrush}" />
+
+        <!-- Every note -->
+        <DockPanel>
+            <CheckBox DockPanel.Dock="Right" FontSize="12.5" Foreground="{DynamicResource InkBrush}"
+                      IsChecked="{Binding ShowsCurrentPageOnly}" Content="{loc:Localize Notes_ThisPageOnly}" />
+            <TextBlock Classes="note" VerticalAlignment="Center" Text="{Binding CountText}" />
+        </DockPanel>
+        <TextBlock Classes="note" Margin="0,4,0,0" IsVisible="{Binding !HasItems}" Text="{loc:Localize Notes_Empty}" />
+        <ScrollViewer MaxHeight="360" HorizontalScrollBarVisibility="Disabled" IsVisible="{Binding HasItems}">
+            <ItemsControl ItemsSource="{Binding Items}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:NoteEntry">
+                        <StackPanel Margin="0,6,4,8">
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="10" VerticalAlignment="Top">
+                                    <Button Classes="link" Command="{Binding EditCommand}" IsVisible="{Binding !IsEditing}">
+                                        <TextBlock Text="{loc:Localize Notes_Edit}" />
+                                    </Button>
+                                    <Button Classes="link" Command="{Binding RemoveCommand}"
+                                            ToolTip.Tip="{loc:Localize Notes_Remove}" AutomationProperties.Name="{loc:Localize Notes_Remove}">
+                                        <PathIcon Width="10" Height="10" Foreground="{DynamicResource FaintInkBrush}" Data="{StaticResource Icon.Close}" />
+                                    </Button>
+                                </StackPanel>
+                                <Button Classes="link" HorizontalAlignment="Left" Command="{Binding OpenCommand}"
+                                        ToolTip.Tip="{loc:Localize Notes_Open}">
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding Caption}" />
+                                </Button>
+                            </DockPanel>
+                            <Border Classes="quote" IsVisible="{Binding HasQuote}">
+                                <SelectableTextBlock Text="{Binding Quote}" />
+                            </Border>
+                            <SelectableTextBlock Classes="text" FontSize="13" IsVisible="{Binding ShowsText}" Text="{Binding Text}" />
+                            <StackPanel IsVisible="{Binding IsEditing}">
+                                <TextBox Classes="note" Text="{Binding EditText}" />
+                                <WrapPanel Margin="0,4,0,0">
+                                    <Button Classes="chip" Command="{Binding SaveCommand}" Content="{loc:Localize Common_Save}" />
+                                    <Button Classes="chip" Command="{Binding CancelCommand}" Content="{loc:Localize Common_Cancel}" />
+                                </WrapPanel>
+                            </StackPanel>
+                            <TextBlock FontSize="11.5" Foreground="{DynamicResource FaintInkBrush}" Text="{Binding Details}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Export: a Markdown file, or the same text on the clipboard -->
+        <WrapPanel Margin="0,10,0,0" IsVisible="{Binding HasNotes}">
+            <Button Classes="chip" Click="OnExportClick" Content="{loc:Localize Notes_Export}"
+                    ToolTip.Tip="{loc:Localize Notes_Export_Tip}" />
+            <Button Classes="chip" Click="OnCopyClick" Content="{loc:Localize Notes_CopyAll}" />
+        </WrapPanel>
+        <TextBlock Classes="note" TextWrapping="Wrap" IsVisible="{Binding Status, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                   Text="{Binding Status}" />
+    </StackPanel>
+</UserControl>

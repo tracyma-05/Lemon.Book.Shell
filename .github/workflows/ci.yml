@@ -1,0 +1,44 @@
+name: CI
+
+# Runs only by hand, to save Actions minutes, as the books' CI does. Verify everyday changes locally: `dotnet test`.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Project patterns
+        env:
+          # Optional repository secret: extra regular expressions, one per line (see scripts/check-sensitive.sh).
+          SENSITIVE_PATTERNS: ${{ secrets.SENSITIVE_PATTERNS }}
+        run: bash scripts/check-sensitive.sh
+      - name: gitleaks (full history)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    name: Build, test and pack (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - run: dotnet workload install wasm-tools
+      - run: dotnet test tests/Lemon.Book.Shell.Tests -c Release
+      - run: dotnet pack src/Lemon.Book.Shell -c Release -o artifacts/packages
+      - run: dotnet pack src/Lemon.Book.Shell.Desktop -c Release -o artifacts/packages
+      - run: dotnet pack src/Lemon.Book.Shell.Browser -c Release -o artifacts/packages
