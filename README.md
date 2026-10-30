@@ -43,7 +43,17 @@ dotnet test
 scripts/pack.sh ../Lemon.English.Book
 ```
 
-Bump `<Version>` in `Directory.Build.props` for every change the books should get. The books still to move onto the
+Bump `<Version>` in `Directory.Build.props` for every change the books should get. To publish a version to
+nuget.org, with `NUGET_API_KEY` set in the environment (never in a file), from a clean, committed tree:
+
+```bash
+scripts/push-nuget.sh --dry-run
+scripts/push-nuget.sh
+```
+
+It stops when the version is already on nuget.org.
+
+The books still to move onto the
 package (the Picture, Maths and Explore books) carry their own copy of the shell until they do.
 
 ## Licence

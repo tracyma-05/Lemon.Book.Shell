@@ -36,4 +36,5 @@ dotnet test
 ```
 
 Then bump `<Version>` in `Directory.Build.props` and run `scripts/pack.sh <book>` for each book that should get the
-change.
+change. `scripts/push-nuget.sh` publishes the version to nuget.org (key in `NUGET_API_KEY`, never in a
+file; clean tree only; `--dry-run` first).

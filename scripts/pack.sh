@@ -8,7 +8,7 @@
 #   book  the book's repository (its NuGet.config lists packages/ before nuget.org)
 #
 # Bump <Version> in Directory.Build.props first: NuGet caches a package by its version, so a book would keep the old
-# one. Publishing to nuget.org is by hand (dotnet nuget push), with your own key.
+# one. scripts/push-nuget.sh packs and publishes to nuget.org.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
