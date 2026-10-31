@@ -38,6 +38,12 @@ BookShell.Configure(new BookShellOptions(
 - **Look**: in `App.axaml`, after `<FluentTheme />`:
   `<StyleInclude Source="avares://Lemon.Book.Shell/Styles/Book.axaml" />`. The book's `Application.Resources`
   (its cover, its accent) come before the shell's.
+- **Time**: walkthroughs, narration and practice run on `BookClock` (the system clock, unless a recording holds it
+  and steps it a frame at a time: `BeginStepping`, `Advance`, `EndStepping`); a book's own animations can use its
+  `BookStopwatch` too, so they film smoothly.
+- **Practice**: `PracticeAutopilot.RevealAfterSeconds` is the book's wait before an unanswered question shows its answer
+  (5 by default); the reader can turn that off (`PracticeAutopilot.Load` and `SetRevealsAnswers`, the
+  `practiceRevealsAnswers` setting).
 - **Web**: `main.js` imports `./_content/Lemon.Book.Shell.Browser/download-progress.js` and `wake-lock.js`;
   `Program.cs` imports `WebNarrationAudio.ModuleName` from `WebNarrationAudio.ModuleUrl`; `sw.js` lists the three
   scripts in its shell.

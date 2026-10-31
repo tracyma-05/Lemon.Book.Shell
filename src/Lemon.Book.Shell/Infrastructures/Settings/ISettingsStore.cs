@@ -25,4 +25,6 @@ public static class SettingKeys
     public const string ShowPinyin = "showPinyin";
     public const string ReadToMe = "readToMe";
     public const string Games = "games";
+    /// <summary>"False" when practice questions wait for the child (<c>PracticeAutopilot.RevealsAnswers</c>).</summary>
+    public const string PracticeRevealsAnswers = "practiceRevealsAnswers";
 }

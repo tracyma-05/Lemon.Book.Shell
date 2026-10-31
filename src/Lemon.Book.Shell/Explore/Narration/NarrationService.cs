@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using Lemon.Book.Shell.Infrastructures.Localization;
 using Lemon.Book.Shell.Infrastructures.Settings;
+using Lemon.Book.Shell.Infrastructures.Timing;
 
 namespace Lemon.Book.Shell.Explore.Narration;
 
@@ -86,7 +87,7 @@ public sealed class NarrationService : INarrationService
     private readonly ISettingsStore _store;
     private readonly NarrationManifest _manifest;
     private readonly INarrationAudio _audio;
-    private readonly Stopwatch _silent = new();
+    private readonly BookStopwatch _silent = new();
 
     /// <summary>Clip seconds the silent clock had covered before it was last restarted (a speed change, a switch from audio).</summary>
     private double _silentBase;

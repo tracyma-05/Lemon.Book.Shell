@@ -1,5 +1,6 @@
-using System.Diagnostics;
 using Avalonia.Threading;
+using Lemon.Book.Shell.Infrastructures.Settings;
+using Lemon.Book.Shell.Infrastructures.Timing;
 
 namespace Lemon.Book.Shell.Explore.Lessons;
 
@@ -8,7 +9,8 @@ namespace Lemon.Book.Shell.Explore.Lessons;
 /// answer, and a finished question (answered or shown) is followed by a new one after <see cref="NextSeconds"/>. Every key
 /// or click the page reports to its walkthrough (<see cref="LessonPlayer.UserInteracted"/>) restarts the wait, so typing
 /// a long answer is not cut off; other input calls <see cref="Touch"/>. It stands aside while the page's walkthrough
-/// runs, which sets its own questions.
+/// runs, which sets its own questions. With <see cref="RevealsAnswers"/> off (the reader's choice in the book's settings),
+/// an open question waits for the child however long it takes.
 /// </summary>
 public sealed class PracticeAutopilot : IDisposable
 {
@@ -18,7 +20,7 @@ public sealed class PracticeAutopilot : IDisposable
     private readonly Action? _reveal;
     private readonly Action _next;
     private readonly DispatcherTimer? _timer;
-    private readonly Stopwatch _clock = new();
+    private readonly BookStopwatch _clock = new();
     private double _lastTick;
     private double _idle;
     private double _done;
@@ -51,8 +53,31 @@ public sealed class PracticeAutopilot : IDisposable
         _timer.Start();
     }
 
+    /// <summary>
+    /// The reader's choice for every practice page: an open question left alone shows its answer. Off, it waits for the
+    /// child. Read from the settings with <see cref="Load"/>, changed with <see cref="SetRevealsAnswers"/>.
+    /// </summary>
+    public static bool RevealsAnswers { get; set; } = true;
+
+    /// <summary>
+    /// The book's wait before an open question shows its answer, for every practice page: a maths book gives the child
+    /// long enough to work a sum out in their head.
+    /// </summary>
+    public static double RevealAfterSeconds { get; set; } = 5;
+
     /// <summary>Seconds without a key or click on an open question before its answer is shown.</summary>
-    internal double AnswerSeconds { get; set; } = 5;
+    internal double AnswerSeconds { get; set; } = RevealAfterSeconds;
+
+    /// <summary>The reader's choice (<see cref="RevealsAnswers"/>) from the settings, when the book is built over them.</summary>
+    public static void Load(ISettingsStore settings) =>
+        RevealsAnswers = settings.Get(SettingKeys.PracticeRevealsAnswers) != bool.FalseString;
+
+    /// <summary>The reader changed <see cref="RevealsAnswers"/>: kept in the settings (only when off; on is the default).</summary>
+    public static void SetRevealsAnswers(ISettingsStore settings, bool value)
+    {
+        RevealsAnswers = value;
+        settings.Set(SettingKeys.PracticeRevealsAnswers, value ? null : bool.FalseString);
+    }
 
     /// <summary>Seconds a finished question stays up (the praise, or the shown answer) before the next one.</summary>
     internal double NextSeconds { get; set; } = 3;
@@ -85,7 +110,7 @@ public sealed class PracticeAutopilot : IDisposable
         }
 
         _done = 0;
-        if (_reveal is null) return;
+        if (_reveal is null || !RevealsAnswers) return;
         _idle += seconds;
         if (_idle < AnswerSeconds) return;
         _idle = 0;
