@@ -13,14 +13,20 @@ namespace Lemon.Book.Shell.Desktop;
 /// which is the redirect address registered for the client. A plain socket rather than HttpListener: on Windows that
 /// needs a URL reservation for 127.0.0.1, and only one request line is read here.
 /// </summary>
-public sealed class LoopbackSignInFlow : ISignInFlow
+/// <param name="port">
+/// The book's own port: each book's client is registered with http://127.0.0.1:&lt;port&gt;/signin, and books on
+/// different ports can sign in at the same time.
+/// </param>
+public sealed class LoopbackSignInFlow(int port = LoopbackSignInFlow.DefaultPort) : ISignInFlow
 {
-    /// <summary>Registered with the sign-in service as http://127.0.0.1:47613/signin.</summary>
-    internal const int Port = 47613;
+    /// <summary>The first book's port (http://127.0.0.1:47613/signin).</summary>
+    public const int DefaultPort = 47613;
 
     private const string CallbackPath = "/signin";
 
-    public Uri RedirectUri { get; } = new($"http://127.0.0.1:{Port}{CallbackPath}");
+    public int Port { get; } = port;
+
+    public Uri RedirectUri { get; } = new($"http://127.0.0.1:{port}{CallbackPath}");
 
     public async Task<string?> SignInAsync(Uri authorizeUrl, CancellationToken cancellationToken)
     {
