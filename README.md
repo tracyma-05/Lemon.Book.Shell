@@ -40,7 +40,10 @@ BookShell.Configure(new BookShellOptions(
   (its cover, its accent) come before the shell's.
 - **Time**: walkthroughs, narration and practice run on `BookClock` (the system clock, unless a recording holds it
   and steps it a frame at a time: `BeginStepping`, `Advance`, `EndStepping`); a book's own animations can use its
-  `BookStopwatch` too, so they film smoothly.
+  `BookStopwatch` too, so they film smoothly. A recording that cannot wait for a viewer shortens a walkthrough's
+  pauses (`LessonPlayer.AnswerSeconds`, `TryItSeconds`, `ResumeSeconds`) and names its audio folder with
+  `NarrationService.CultureFolder`.
+- **Diagrams**: an interactive diagram keeps room at its bottom for the walkthrough's subtitles with `LessonReserve`.
 - **Practice**: `PracticeAutopilot.RevealAfterSeconds` is the book's wait before an unanswered question shows its answer
   (5 by default); the reader can turn that off (`PracticeAutopilot.Load` and `SetRevealsAnswers`, the
   `practiceRevealsAnswers` setting).

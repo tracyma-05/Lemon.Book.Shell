@@ -4,7 +4,7 @@ namespace Lemon.Book.Shell.Controls.Explore;
 /// The room an Explore diagram leaves at the bottom while a walkthrough's subtitle strip sits above its toolbar, so
 /// the strip does not cover the picture. The diagram eases towards it frame by frame instead of jumping.
 /// </summary>
-internal sealed class LessonReserve
+public sealed class LessonReserve
 {
     /// <summary>DIPs for a two-line subtitle with the step buttons, plus the gap above the toolbar.</summary>
     public const double Height = 120;

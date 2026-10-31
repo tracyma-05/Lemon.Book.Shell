@@ -245,7 +245,7 @@ public sealed class NarrationService : INarrationService
     }
 
     /// <summary>The audio folder for a culture: zh-CN for any Chinese, otherwise English.</summary>
-    internal static string CultureFolder(string culture) =>
+    public static string CultureFolder(string culture) =>
         culture.StartsWith("zh", StringComparison.OrdinalIgnoreCase) ? "zh-CN" : "en";
 
     private static NarrationSettings Load(ISettingsStore store)

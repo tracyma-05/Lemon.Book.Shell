@@ -114,13 +114,13 @@ public sealed partial class LessonPlayer : ObservableObject, IDisposable
     public double GapSeconds { get; set; } = 0.8;
 
     /// <summary>A question nobody answers in this many seconds shows its answer and the lesson goes on.</summary>
-    internal double AnswerSeconds { get; set; } = 5;
+    public double AnswerSeconds { get; set; } = 5;
 
     /// <summary>A "your turn" step left alone this long (no touch in the picture) is skipped.</summary>
-    internal double TryItSeconds { get; set; } = 12;
+    public double TryItSeconds { get; set; } = 12;
 
     /// <summary>After the viewer stops touching the picture (and any clicked explanation ends), the lesson goes on.</summary>
-    internal double ResumeSeconds { get; set; } = 5;
+    public double ResumeSeconds { get; set; } = 5;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsActive), nameof(IsPaused), nameof(IsTryIt), nameof(IsQuiz), nameof(IsDone),

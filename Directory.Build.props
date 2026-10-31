@@ -12,7 +12,7 @@
     <Authors>Tracy Ma</Authors>
     <Copyright>Copyright (c) 2026 Tracy Ma</Copyright>
     <!-- One version for the three packages: bump it for every change the books should get (NuGet caches by version). -->
-    <Version>0.1.5</Version>
+    <Version>0.1.6</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
