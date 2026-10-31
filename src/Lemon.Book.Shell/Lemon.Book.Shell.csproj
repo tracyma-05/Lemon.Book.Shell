@@ -31,6 +31,11 @@
     <EmbeddedResource Update="Resources\ShellStrings.resx">
       <LogicalName>Lemon.Book.Shell.Resources.ShellStrings.resources</LogicalName>
     </EmbeddedResource>
+    <!--
+      The strings as text too, at strings/ in the package: a book's font subsetting reads them there (its fonts must
+      show every character the shell's strings use), since a script cannot read them out of the assembly.
+    -->
+    <None Include="Resources\ShellStrings*.resx" Pack="true" PackagePath="strings\" Visible="false" />
   </ItemGroup>
 
 </Project>

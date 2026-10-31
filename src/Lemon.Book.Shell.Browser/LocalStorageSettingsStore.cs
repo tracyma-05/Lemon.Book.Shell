@@ -3,16 +3,28 @@ using Lemon.Book.Shell.Infrastructures.Settings;
 
 namespace Lemon.Book.Shell.Browser;
 
-/// <summary>Reader preferences in the browser's <c>localStorage</c>, under a per-app prefix.</summary>
-public sealed partial class LocalStorageSettingsStore : ISettingsStore
+/// <summary>Reader preferences in the browser's <c>localStorage</c>, under a per-book prefix.</summary>
+/// <param name="prefix">
+/// The book's prefix (<c>picture-book:</c>, <c>maths-book:</c>): a book keeps the one it saved under before, and two
+/// books served from one site keep apart.
+/// </param>
+public sealed partial class LocalStorageSettingsStore(string prefix) : ISettingsStore
 {
-    private const string Prefix = "picture-book:";
+    /// <summary>The first book's prefix.</summary>
+    public const string DefaultPrefix = "picture-book:";
+
+    private readonly string _prefix = prefix;
+
+    public LocalStorageSettingsStore()
+        : this(DefaultPrefix)
+    {
+    }
 
     public string? Get(string key)
     {
         try
         {
-            return GetItem(Prefix + key);
+            return GetItem(_prefix + key);
         }
         catch (JSException)
         {
@@ -31,7 +43,7 @@ public sealed partial class LocalStorageSettingsStore : ISettingsStore
                 // key(i) is null past the end.
                 for (var i = 0; KeyAt(i) is { } name; i++)
                 {
-                    if (name.StartsWith(Prefix, StringComparison.Ordinal)) keys.Add(name[Prefix.Length..]);
+                    if (name.StartsWith(_prefix, StringComparison.Ordinal)) keys.Add(name[_prefix.Length..]);
                 }
             }
             catch (JSException)
@@ -49,11 +61,11 @@ public sealed partial class LocalStorageSettingsStore : ISettingsStore
         {
             if (value is null)
             {
-                RemoveItem(Prefix + key);
+                RemoveItem(_prefix + key);
             }
             else
             {
-                SetItem(Prefix + key, value);
+                SetItem(_prefix + key, value);
             }
         }
         catch (JSException)

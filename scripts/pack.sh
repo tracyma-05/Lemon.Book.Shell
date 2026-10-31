@@ -39,6 +39,14 @@ for script in narration.js download-progress.js wake-lock.js; do
     fi
 done
 
+# A book's font subsetting reads the shell's strings from strings/ in the package.
+for strings in ShellStrings.resx ShellStrings.en.resx; do
+    if ! unzip -l "$OUT/Lemon.Book.Shell.$VERSION.nupkg" | grep -q "strings/$strings"; then
+        echo "Lemon.Book.Shell.$VERSION.nupkg has no strings/$strings." >&2
+        exit 1
+    fi
+done
+
 if [[ -n "$BOOK" ]]; then
     mkdir -p "$BOOK/packages"
     cp "$OUT"/Lemon.Book.Shell*."$VERSION".nupkg "$BOOK/packages/"

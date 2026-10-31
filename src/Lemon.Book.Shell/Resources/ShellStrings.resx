@@ -4,10 +4,10 @@
     <value>text/microsoft-resx</value>
   </resheader>
   <data name="Account_Callback_Done" xml:space="preserve">
-    <value>登录好了！可以关掉这个网页，回到柠檬绘本。</value>
+    <value>登录好了！可以关掉这个网页，回到书里。</value>
   </data>
   <data name="Account_Callback_Failed" xml:space="preserve">
-    <value>没有登录成功，请回到柠檬绘本再试一次。</value>
+    <value>没有登录成功，请回到书里再试一次。</value>
   </data>
   <data name="Account_ChildIs" xml:space="preserve">
     <value>同步的是：{0} 的进度</value>
@@ -31,7 +31,7 @@
     <value>已登录：{0}</value>
   </data>
   <data name="Account_SignedOut" xml:space="preserve">
-    <value>未登录：读到哪儿、生词本和小游戏都只保存在这台设备上。</value>
+    <value>未登录：读到哪儿和学过的东西都只保存在这台设备上。</value>
   </data>
   <data name="Account_SigningIn" xml:space="preserve">
     <value>正在登录…请在打开的网页里输入用户名和密码。</value>
@@ -142,7 +142,7 @@
     <value>导出…</value>
   </data>
   <data name="Notes_Export_FileName" xml:space="preserve">
-    <value>柠檬绘本-笔记-{0}.md</value>
+    <value>笔记-{0}.md</value>
   </data>
   <data name="Notes_Export_Markdown" xml:space="preserve">
     <value>Markdown 文档</value>
@@ -160,7 +160,7 @@
     <value>把全部笔记保存为 Markdown 文件</value>
   </data>
   <data name="Notes_Export_Title" xml:space="preserve">
-    <value>柠檬绘本 · 笔记</value>
+    <value>笔记</value>
   </data>
   <data name="Notes_Exported" xml:space="preserve">
     <value>已导出到 {0}</value>
@@ -205,10 +205,10 @@
     <value>赭红</value>
   </data>
   <data name="Update_Banner_Download" xml:space="preserve">
-    <value>数学之书 {0} 已发布。下载后关闭本程序，再覆盖安装。</value>
+    <value>新版本 {0} 已发布。下载后关闭本程序，再覆盖安装。</value>
   </data>
   <data name="Update_Banner_Install" xml:space="preserve">
-    <value>数学之书 {0} 已发布，「更新并重启」只需几秒钟。</value>
+    <value>新版本 {0} 已发布，「更新并重启」只需几秒钟。</value>
   </data>
   <data name="Update_Checking" xml:space="preserve">
     <value>正在检查…</value>

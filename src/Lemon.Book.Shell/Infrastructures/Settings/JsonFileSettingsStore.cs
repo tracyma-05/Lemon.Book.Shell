@@ -17,11 +17,17 @@ public sealed class JsonFileSettingsStore : ISettingsStore
         _values = Load(path);
     }
 
-    /// <summary>The default location: <c>%APPDATA%\Lemon.Book.Shell</c> or <c>~/Library/Application Support/Lemon.Book.Shell</c>.</summary>
-    public static string DefaultPath() =>
+    /// <summary>The first book's location: <c>%APPDATA%\Lemon.Book.Shell</c> or <c>~/Library/Application Support/Lemon.Book.Shell</c>.</summary>
+    public static string DefaultPath() => DefaultPath("Lemon.Book.Shell");
+
+    /// <summary>
+    /// The book's own location, <c>%APPDATA%\&lt;folder&gt;</c> or <c>~/Library/Application Support/&lt;folder&gt;</c>:
+    /// a book that kept its settings before it took the shell passes the folder it used, so they are still there.
+    /// </summary>
+    public static string DefaultPath(string folder) =>
         Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "Lemon.Book.Shell",
+            folder,
             "settings.json");
 
     public string? Get(string key) => _values.GetValueOrDefault(key);

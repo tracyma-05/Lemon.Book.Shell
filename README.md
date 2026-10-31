@@ -24,11 +24,17 @@ BookShell.Configure(new BookShellOptions(
 ```
 
 - **Strings**: the book's `Resources/AppStrings.resx` (embedded as `<assembly>.Resources.AppStrings.resources`) comes
-  first, then the shell's `ShellStrings.resx`, so a book can reword any shell string. The book defines the lesson
+  first, then the shell's `ShellStrings.resx` (Chinese, with `ShellStrings.en.resx` in English), so a book can reword
+  any shell string. A book in both languages lists them in `BookShellOptions.Cultures` (`["en", "zh-CN"]`, the
+  default first); the shell's strings never name a book, so a book words its name into those that should. The book defines the lesson
   player's narration lines (`Narr_Common_Right`, `_Wrong`, `_Nice`, `_Reveal`, `_MoveOn`): each book renders its own
   recordings.
 - **Narration**: the book embeds its manifest as `<assembly>.Narration.Manifest`.
 - **Build metadata**: `<AssemblyMetadata Include="UpdateFeed" …>` and `SyncServer` in the book's project.
+- **Settings**: each head gives the book its own store, and a book keeps where it saved before it took the shell, so a
+  reader's progress survives the move: `new JsonFileSettingsStore(JsonFileSettingsStore.DefaultPath("Lemon.My.Book"))`
+  on the desktop (the folder under the application-data folder), `new LocalStorageSettingsStore("my-book:")` on the
+  web (the `localStorage` prefix). The forms without one keep the first book's (`Lemon.Book.Shell`, `picture-book:`).
 - **Look**: in `App.axaml`, after `<FluentTheme />`:
   `<StyleInclude Source="avares://Lemon.Book.Shell/Styles/Book.axaml" />`. The book's `Application.Resources`
   (its cover, its accent) come before the shell's.

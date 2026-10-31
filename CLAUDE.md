@@ -25,9 +25,10 @@ Explore books are to move onto it one at a time. Using it and packing it: `READM
 
 ## Strings
 
-- The shell's strings are in `src/Lemon.Book.Shell/Resources/ShellStrings.resx` (Chinese). A book's own
-  `AppStrings.resx` comes first and may reword any of them. Narration lines (`Narr_*`) are never here: each book
-  records its own.
+- The shell's strings are in `src/Lemon.Book.Shell/Resources/ShellStrings.resx` (Chinese) and `ShellStrings.en.resx`
+  (English, for a book written in both: `BookShellOptions.Cultures`). Every key is in both, and none names a book
+  (`ShellStringsTests`): a book's own `AppStrings.resx` comes first and words them its own way (its name in the update
+  banner, the notes' export). Narration lines (`Narr_*`) are never here: each book records its own.
 
 ## Before committing
 

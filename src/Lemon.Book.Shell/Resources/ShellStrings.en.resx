@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <data name="Account_Callback_Done" xml:space="preserve">
+    <value>Signed in! You can close this page and go back to the book.</value>
+  </data>
+  <data name="Account_Callback_Failed" xml:space="preserve">
+    <value>Signing in did not work. Go back to the book and try again.</value>
+  </data>
+  <data name="Account_ChildIs" xml:space="preserve">
+    <value>Syncing {0}'s progress</value>
+  </data>
+  <data name="Account_ChildrenFailed" xml:space="preserve">
+    <value>Can't connect right now. Try again later.</value>
+  </data>
+  <data name="Account_NeedsSignIn" xml:space="preserve">
+    <value>Your sign-in has expired. Sign in again; your progress is still saved on this device.</value>
+  </data>
+  <data name="Account_NoChild" xml:space="preserve">
+    <value>No child chosen: progress is kept in this account. A parent can choose a child, and each child's progress is kept apart.</value>
+  </data>
+  <data name="Account_NoChildren" xml:space="preserve">
+    <value>There are no children in this account yet. Add one first.</value>
+  </data>
+  <data name="Account_Offline" xml:space="preserve">
+    <value>Can't connect right now. Progress is saved on this device and syncs later.</value>
+  </data>
+  <data name="Account_SignedInAs" xml:space="preserve">
+    <value>Signed in as {0}</value>
+  </data>
+  <data name="Account_SignedOut" xml:space="preserve">
+    <value>Not signed in: where you are and what you have learnt are saved only on this device.</value>
+  </data>
+  <data name="Account_SigningIn" xml:space="preserve">
+    <value>Signing in… Enter your user name and password on the page that opened.</value>
+  </data>
+  <data name="Account_Someone" xml:space="preserve">
+    <value>this account</value>
+  </data>
+  <data name="Account_SyncedAt" xml:space="preserve">
+    <value>Synced · {0}</value>
+  </data>
+  <data name="Account_Syncing" xml:space="preserve">
+    <value>Syncing…</value>
+  </data>
+  <data name="Bookmarks_Add" xml:space="preserve">
+    <value>Bookmark this page</value>
+  </data>
+  <data name="Bookmarks_Details" xml:space="preserve">
+    <value>Page {0} · added {1}</value>
+  </data>
+  <data name="Bookmarks_Empty" xml:space="preserve">
+    <value>No bookmarks yet. Bookmarked pages get a ribbon at the top.</value>
+  </data>
+  <data name="Bookmarks_Remove" xml:space="preserve">
+    <value>Remove this page's bookmark</value>
+  </data>
+  <data name="Bookmarks_RemoveOne" xml:space="preserve">
+    <value>Remove bookmark</value>
+  </data>
+  <data name="Bookmarks_Shortcut" xml:space="preserve">
+    <value>Shortcut: Ctrl+D</value>
+  </data>
+  <data name="Bookmarks_Title" xml:space="preserve">
+    <value>Bookmarks</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Cover_Open" xml:space="preserve">
+    <value>Open the book</value>
+  </data>
+  <data name="Lesson_Done_Text" xml:space="preserve">
+    <value>That's the end of this walkthrough. Keep dragging and clicking things in the picture to explore, or switch to another view and listen again.</value>
+  </data>
+  <data name="Lesson_Next" xml:space="preserve">
+    <value>Next step</value>
+  </data>
+  <data name="Lesson_PauseResume" xml:space="preserve">
+    <value>Pause or resume</value>
+  </data>
+  <data name="Lesson_Previous" xml:space="preserve">
+    <value>Previous step</value>
+  </data>
+  <data name="Lesson_Restart" xml:space="preserve">
+    <value>Start over</value>
+  </data>
+  <data name="Lesson_Skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="Lesson_State_Done" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="Lesson_State_Paused" xml:space="preserve">
+    <value>Paused</value>
+  </data>
+  <data name="Lesson_State_Quiz" xml:space="preserve">
+    <value>Think about it</value>
+  </data>
+  <data name="Lesson_State_Speaking" xml:space="preserve">
+    <value>Walkthrough</value>
+  </data>
+  <data name="Lesson_State_TryIt" xml:space="preserve">
+    <value>Your turn</value>
+  </data>
+  <data name="Lesson_Step" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="Lesson_Stop" xml:space="preserve">
+    <value>End the walkthrough</value>
+  </data>
+  <data name="Lesson_TimeLeft" xml:space="preserve">
+    <value>Time left to answer</value>
+  </data>
+  <data name="Notes_Add" xml:space="preserve">
+    <value>Save note</value>
+  </data>
+  <data name="Notes_Copied" xml:space="preserve">
+    <value>Copied every note to the clipboard, as Markdown.</value>
+  </data>
+  <data name="Notes_CopyAll" xml:space="preserve">
+    <value>Copy all</value>
+  </data>
+  <data name="Notes_Count" xml:space="preserve">
+    <value>{0} notes</value>
+  </data>
+  <data name="Notes_Details" xml:space="preserve">
+    <value>Page {0} · {1}</value>
+  </data>
+  <data name="Notes_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Notes_Empty" xml:space="preserve">
+    <value>No notes here yet.</value>
+  </data>
+  <data name="Notes_Export" xml:space="preserve">
+    <value>Export…</value>
+  </data>
+  <data name="Notes_Export_FileName" xml:space="preserve">
+    <value>Notes-{0}.md</value>
+  </data>
+  <data name="Notes_Export_Markdown" xml:space="preserve">
+    <value>Markdown</value>
+  </data>
+  <data name="Notes_Export_Page" xml:space="preserve">
+    <value>{0} (page {1})</value>
+  </data>
+  <data name="Notes_Export_Summary" xml:space="preserve">
+    <value>Exported {0} · {1} notes</value>
+  </data>
+  <data name="Notes_Export_Text" xml:space="preserve">
+    <value>Plain text</value>
+  </data>
+  <data name="Notes_Export_Tip" xml:space="preserve">
+    <value>Save every note as a Markdown file</value>
+  </data>
+  <data name="Notes_Export_Title" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Notes_Exported" xml:space="preserve">
+    <value>Exported to {0}</value>
+  </data>
+  <data name="Notes_Hint" xml:space="preserve">
+    <value>Tip: select text on a page, right-click it and choose "Add to notes" to quote it.</value>
+  </data>
+  <data name="Notes_Open" xml:space="preserve">
+    <value>Turn to this page</value>
+  </data>
+  <data name="Notes_Placeholder" xml:space="preserve">
+    <value>Write a note on this page…</value>
+  </data>
+  <data name="Notes_Remove" xml:space="preserve">
+    <value>Delete note</value>
+  </data>
+  <data name="Notes_RemoveQuote" xml:space="preserve">
+    <value>Remove the quote</value>
+  </data>
+  <data name="Notes_ThisPageOnly" xml:space="preserve">
+    <value>This page only</value>
+  </data>
+  <data name="Notes_Title" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Page_Caption" xml:space="preserve">
+    <value>Page {0}</value>
+  </data>
+  <data name="Theme_Accent_Amber" xml:space="preserve">
+    <value>Amber</value>
+  </data>
+  <data name="Theme_Accent_Indigo" xml:space="preserve">
+    <value>Indigo</value>
+  </data>
+  <data name="Theme_Accent_Pine" xml:space="preserve">
+    <value>Pine</value>
+  </data>
+  <data name="Theme_Accent_Plum" xml:space="preserve">
+    <value>Plum</value>
+  </data>
+  <data name="Theme_Accent_Terracotta" xml:space="preserve">
+    <value>Terracotta</value>
+  </data>
+  <data name="Update_Banner_Download" xml:space="preserve">
+    <value>Version {0} of the book is available. Download it, close the book and install it over this copy.</value>
+  </data>
+  <data name="Update_Banner_Install" xml:space="preserve">
+    <value>Version {0} of the book is available. Update and restart takes a few seconds.</value>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Checking…</value>
+  </data>
+  <data name="Update_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Downloading the update…</value>
+  </data>
+  <data name="Update_Error_Damaged" xml:space="preserve">
+    <value>The download is damaged (its checksum does not match). Try again, or download it by hand.</value>
+  </data>
+  <data name="Update_Error_Download" xml:space="preserve">
+    <value>The download failed (HTTP {0}). Try again later.</value>
+  </data>
+  <data name="Update_Error_Http" xml:space="preserve">
+    <value>The update server answered with an error (HTTP {0}). Try again later.</value>
+  </data>
+  <data name="Update_Error_Install" xml:space="preserve">
+    <value>Could not install automatically: {0} Download it by hand.</value>
+  </data>
+  <data name="Update_Error_Interrupted" xml:space="preserve">
+    <value>The download was interrupted. Check the network and try again.</value>
+  </data>
+  <data name="Update_Error_Launch" xml:space="preserve">
+    <value>The updater did not start. Download the update by hand.</value>
+  </data>
+  <data name="Update_Error_NoFeed" xml:space="preserve">
+    <value>No update address. Set one in Settings → Updates.</value>
+  </data>
+  <data name="Update_Error_NoPackage" xml:space="preserve">
+    <value>{0} is out, but there is no package for this computer ({1}).</value>
+  </data>
+  <data name="Update_Error_NoRelease" xml:space="preserve">
+    <value>No version has been released yet.</value>
+  </data>
+  <data name="Update_Error_NotThisApp" xml:space="preserve">
+    <value>The package does not contain {0}, so it cannot be installed automatically. Download it by hand.</value>
+  </data>
+  <data name="Update_Error_NotZip" xml:space="preserve">
+    <value>The package is not a zip file, so it cannot be installed automatically. Download it by hand.</value>
+  </data>
+  <data name="Update_Error_Offline" xml:space="preserve">
+    <value>Could not reach the update server. Check the network and try again.</value>
+  </data>
+  <data name="Update_Error_Unreadable" xml:space="preserve">
+    <value>Could not read the version information from the update server.</value>
+  </data>
+  <data name="Update_Feed_BuiltIn" xml:space="preserve">
+    <value>The address this release was built with.</value>
+  </data>
+  <data name="Update_Feed_FromFile" xml:space="preserve">
+    <value>The address set by whoever packaged this copy (update-feed.txt next to the program).</value>
+  </data>
+  <data name="Update_Feed_FromReader" xml:space="preserve">
+    <value>Your own address.</value>
+  </data>
+  <data name="Update_Feed_Invalid" xml:space="preserve">
+    <value>Not an address updates can be read from.</value>
+  </data>
+  <data name="Update_Feed_None" xml:space="preserve">
+    <value>No update address: this copy does not look for updates.</value>
+  </data>
+  <data name="Update_Feed_Saved" xml:space="preserve">
+    <value>Saved.</value>
+  </data>
+  <data name="Update_InstallAndRestart" xml:space="preserve">
+    <value>Update and restart</value>
+  </data>
+  <data name="Update_Notice_Failed" xml:space="preserve">
+    <value>The last update did not install; this is still {0}. Close anything using the book's folder and try again.</value>
+  </data>
+  <data name="Update_Notice_Updated" xml:space="preserve">
+    <value>Updated to {0}.</value>
+  </data>
+  <data name="Update_Progress" xml:space="preserve">
+    <value>Downloading… {0}% ({1} of {2})</value>
+  </data>
+  <data name="Update_Progress_Unknown" xml:space="preserve">
+    <value>Downloading… {0}</value>
+  </data>
+  <data name="Update_Restarting" xml:space="preserve">
+    <value>Installing and restarting…</value>
+  </data>
+  <data name="Update_Status_Available" xml:space="preserve">
+    <value>Version {0} is available.</value>
+  </data>
+  <data name="Update_Status_UpToDate" xml:space="preserve">
+    <value>{0} is the latest version.</value>
+  </data>
+</root>
