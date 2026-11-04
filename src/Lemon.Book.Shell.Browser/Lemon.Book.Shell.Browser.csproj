@@ -21,6 +21,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lemon.Book.Shell\Lemon.Book.Shell.csproj" />
+    <!-- Sign-in by redirect (RedirectSignInFlow), from the hub client. -->
+    <ProjectReference Include="..\Lemon.Hub.Client.Browser\Lemon.Hub.Client.Browser.csproj" />
+    <!-- Keeps a book's `new RedirectSignInFlow()` under `using Lemon.Book.Shell.Browser;` compiling (see the file). -->
+    <None Include="buildTransitive\*.targets" Pack="true" PackagePath="buildTransitive\" />
   </ItemGroup>
 
 </Project>

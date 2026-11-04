@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Packs the shell (Lemon.Book.Shell, .Desktop and .Browser) and pushes the three packages to nuget.org.
+# Packs the hub client (Lemon.Hub.Client, .Desktop, .Browser) and the shell (Lemon.Book.Shell, .Desktop, .Browser)
+# and pushes the six packages to nuget.org.
 #
 # Usage: scripts/push-nuget.sh [--dry-run]
 #   --dry-run  test and pack, say what would be pushed, push nothing
 #
-# The key is read from NUGET_API_KEY, never written anywhere. Bump <Version> in Directory.Build.props first: the three
+# The key is read from NUGET_API_KEY, never written anywhere. Bump <Version> in Directory.Build.props first: the six
 # packages share it, and nuget.org never takes a version twice, so a version already there stops the script before
 # anything is built. Packs only from a clean, committed tree, so every version on nuget.org is a commit here.
 set -euo pipefail
@@ -21,8 +22,9 @@ esac
 SOURCE=https://api.nuget.org/v3/index.json
 OUT=artifacts/packages
 VERSION="$(sed -nE 's|.*<Version>([^<]+)</Version>.*|\1|p' Directory.Build.props | head -1)"
-# The shell first: the desktop and web packages depend on it.
-PACKAGES=(Lemon.Book.Shell Lemon.Book.Shell.Desktop Lemon.Book.Shell.Browser)
+# The hub client first, then the shell: each family's desktop and web packages depend on its first, and the shell
+# depends on the hub client.
+PACKAGES=(Lemon.Hub.Client Lemon.Hub.Client.Desktop Lemon.Hub.Client.Browser Lemon.Book.Shell Lemon.Book.Shell.Desktop Lemon.Book.Shell.Browser)
 
 # On Windows, a shell started before the key was set does not have it yet: read the user's own.
 if [[ -z "${NUGET_API_KEY:-}" ]] && command -v powershell.exe >/dev/null; then
@@ -50,7 +52,7 @@ done
 # Nothing secret goes out in a package either.
 scripts/check-sensitive.sh
 
-# Tests, packs the three, and checks the web package carries its scripts.
+# Tests, packs the six, and checks what each package must carry.
 for package in "${PACKAGES[@]}"; do rm -f "$OUT/$package.$VERSION.nupkg"; done
 scripts/pack.sh
 

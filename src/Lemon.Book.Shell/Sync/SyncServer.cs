@@ -5,7 +5,7 @@ namespace Lemon.Book.Shell.Sync;
 /// written in this repository: it is built in at build time (<c>dotnet publish -p:SyncServer=https://…/</c>, or a
 /// git-ignored <c>sync.local.props</c>, see Directory.Build.props), or set by <see cref="FileName"/> next to the
 /// program. Without one, sign-in is not offered and everything stays on the device.
-/// The server tells the book which sign-in service and client to use (<see cref="SyncClientInfo"/>).
+/// The server tells the book which sign-in service and client to use (<see cref="Lemon.Hub.Client.SyncClientInfo"/>).
 /// </summary>
 public static class SyncServer
 {

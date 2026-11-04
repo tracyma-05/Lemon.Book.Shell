@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using Lemon.Hub.Client;
 using Lemon.Pet.Look;
 
 namespace Lemon.Book.Shell.Sync;
@@ -39,8 +40,9 @@ public enum SyncState
 /// </summary>
 public sealed class SyncService
 {
-    public const string SessionKey = "account.session";
-    internal const string PendingKey = "account.pending";
+    /// <summary>Where the session is kept in the book's settings, unless the book keeps it elsewhere (see the constructor).</summary>
+    public const string SessionKey = KeyValueSessionStore.DefaultSessionKey;
+    internal const string PendingKey = KeyValueSessionStore.DefaultPendingKey;
 
     /// <summary>The child whose progress this device syncs (<see cref="SyncChild"/>); device-only like the session.</summary>
     public const string ChildKey = "account.child";
@@ -55,7 +57,7 @@ public sealed class SyncService
     private readonly Uri? _server;
     private readonly ISignInFlow? _flow;
     private readonly HttpClient _http;
-    private readonly OidcClient _oidc;
+    private readonly HubAccount _account;
     private readonly Func<DateTime> _now;
     private readonly string _deviceName;
     private readonly string _platform;
@@ -64,17 +66,24 @@ public sealed class SyncService
     private bool _again;
     private DateTime? _dueAt;
 
-    public SyncService(SyncedSettingsStore store, Uri? server, ISignInFlow? flow, HttpClient? http = null, Func<DateTime>? now = null)
+    /// <param name="sessions">
+    /// Where the signed-in session (its refresh token) is kept; by default the book's own settings, device-only
+    /// (<see cref="SessionKey"/>).
+    /// </param>
+    public SyncService(
+        SyncedSettingsStore store, Uri? server, ISignInFlow? flow, HttpClient? http = null, Func<DateTime>? now = null,
+        ISessionStore? sessions = null)
     {
         _store = store;
         _server = server;
         _flow = flow;
         _http = http ?? new HttpClient { Timeout = TimeSpan.FromSeconds(20) };
-        _oidc = new OidcClient(_http);
         _now = now ?? (() => DateTime.UtcNow);
+        _account = new HubAccount(
+            sessions ?? new KeyValueSessionStore(_store.Inner.Get, _store.Inner.Set, SessionKey, PendingKey), flow, _http, _now);
+        _account.SessionChanged += (_, _) => StatusChanged?.Invoke(this, EventArgs.Empty);
         _deviceName = OperatingSystem.IsBrowser() ? "浏览器" : SafeMachineName();
         _platform = OperatingSystem.IsBrowser() ? "browser" : OperatingSystem.IsWindows() ? "windows" : OperatingSystem.IsMacOS() ? "macos" : "other";
-        Session = LoadSession();
         Child = Read(_store.Inner.Get(ChildKey), SyncJson.Default.SyncChild);
         State = !IsAvailable ? SyncState.Unavailable : Session is null ? SyncState.SignedOut : SyncState.Synced;
         _store.LocalChanged += (_, _) => Schedule(AfterChange);
@@ -86,7 +95,7 @@ public sealed class SyncService
     /// <summary>The sync server (the hub, which keeps the child's pet too), or null when there is none.</summary>
     public Uri? Server => _server;
 
-    public AccountSession? Session { get; private set; }
+    public AccountSession? Session => _account.Session;
 
     public bool IsSignedIn => Session is not null;
 
@@ -148,11 +157,11 @@ public sealed class SyncService
         SetState(SyncState.SigningIn);
         try
         {
-            var client = await GetClientAsync(cancel.Token);
-            var (pending, url) = await _oidc.BeginAsync(client, _flow!.RedirectUri, _now(), cancel.Token);
-            _store.Inner.Set(PendingKey, JsonSerializer.Serialize(pending, SyncJson.Default.PendingSignIn));
-            var answer = await _flow.SignInAsync(url, cancel.Token);
-            if (answer is not null) await CompleteSignInAsync(answer, cancel.Token);
+            var client = await _account.Oidc.GetClientInfoAsync(OidcClient.ClientInfoAddress(_server!, SyncServer.App), cancel.Token);
+            var previousUser = Session?.UserId;
+            // Null on the web: the answer comes to the next start (StartAsync).
+            var session = await _account.SignInAsync(client, cancel.Token);
+            if (session is not null) await SignedInAsync(previousUser, session);
         }
         catch (Exception ex) when (ex is HttpRequestException or SignInException or OperationCanceledException or JsonException)
         {
@@ -175,19 +184,15 @@ public sealed class SyncService
     public void SignOut()
     {
         _signIn?.Cancel();
-        Session = null;
-        _store.Inner.Set(SessionKey, null);
+        _account.SignOut();
         SaveChild(null);
-        _store.Inner.Set(PendingKey, null);
         LastSyncedAt = null;
         SetState(IsAvailable ? SyncState.SignedOut : SyncState.Unavailable);
     }
 
     private async Task CompleteSignInAsync(string answer, CancellationToken cancellationToken)
     {
-        var pending = Read(_store.Inner.Get(PendingKey), SyncJson.Default.PendingSignIn);
-        _store.Inner.Set(PendingKey, null);
-        if (pending is null)
+        if (!_account.HasPendingSignIn)
         {
             SetState(IsSignedIn ? SyncState.Synced : SyncState.SignedOut);
             return;
@@ -196,24 +201,35 @@ public sealed class SyncService
         SetState(SyncState.SigningIn);
         try
         {
-            var session = await _oidc.CompleteAsync(pending, answer, _now(), cancellationToken);
-            // Signing in again to the same account (its sign-in ran out) carries on where it was.
-            var firstTime = Session?.UserId is null || Session.UserId != session.UserId;
-            SaveSession(session);
-            if (firstTime)
+            var previousUser = Session?.UserId;
+            var session = await _account.CompleteAsync(answer, cancellationToken);
+            if (session is null)
             {
-                SaveChild(null);
-                // Everything on this device goes to the account, merged with what it has from other devices.
-                _store.ResetForAccount();
+                SetState(IsSignedIn ? SyncState.Synced : SyncState.SignedOut);
+                return;
             }
 
-            await SyncNowAsync();
+            await SignedInAsync(previousUser, session);
         }
         catch (Exception ex) when (ex is HttpRequestException or SignInException or OperationCanceledException or JsonException)
         {
             Log(ex);
             SetState(IsSignedIn ? SyncState.Offline : SyncState.SignedOut);
         }
+    }
+
+    /// <summary>The session is kept: the first sign-in of this account here hands the device's progress to it, then syncs.</summary>
+    private Task SignedInAsync(string? previousUser, AccountSession session)
+    {
+        // Signing in again to the same account (its sign-in ran out) carries on where it was.
+        if (previousUser is null || previousUser != session.UserId)
+        {
+            SaveChild(null);
+            // Everything on this device goes to the account, merged with what it has from other devices.
+            _store.ResetForAccount();
+        }
+
+        return SyncNowAsync();
     }
 
     /// <summary>The signed-in parent's children, as the server has them.</summary>
@@ -354,7 +370,7 @@ public sealed class SyncService
         if (response.StatusCode == HttpStatusCode.Unauthorized)
         {
             // The access token was refused before it expired (the service restarted with new keys): refresh next time.
-            SaveSession(Session! with { ExpiresAt = DateTime.MinValue });
+            _account.Expire();
             throw new HttpRequestException("Sync refused the access token.");
         }
 
@@ -437,36 +453,13 @@ public sealed class SyncService
         }
     }
 
-    private async Task<string> AccessTokenAsync()
-    {
-        var session = Session ?? throw new SignInException("Not signed in.", needsSignIn: true);
-        if (session.ExpiresAt - _now() > TimeSpan.FromMinutes(1)) return session.AccessToken;
-        session = await _oidc.RefreshAsync(session, _now(), CancellationToken.None);
-        SaveSession(session);
-        return session.AccessToken;
-    }
-
-    private async Task<SyncClientInfo> GetClientAsync(CancellationToken cancellationToken)
-    {
-        var body = await _http.GetStringAsync(new Uri(_server!, $"api/app/learning/{SyncServer.App}/client"), cancellationToken);
-        return JsonSerializer.Deserialize(body, SyncJson.Default.SyncClientInfo)
-               ?? throw new SignInException("The sync server did not say how to sign in.");
-    }
-
-    private void SaveSession(AccountSession session)
-    {
-        Session = session;
-        _store.Inner.Set(SessionKey, JsonSerializer.Serialize(session, SyncJson.Default.AccountSession));
-        StatusChanged?.Invoke(this, EventArgs.Empty);
-    }
+    private Task<string> AccessTokenAsync() => _account.GetAccessTokenAsync();
 
     private void SaveChild(SyncChild? child)
     {
         Child = child;
         _store.Inner.Set(ChildKey, child is null ? null : JsonSerializer.Serialize(child, SyncJson.Default.SyncChild));
     }
-
-    private AccountSession? LoadSession() => Read(_store.Inner.Get(SessionKey), SyncJson.Default.AccountSession);
 
     private void SetState(SyncState state)
     {

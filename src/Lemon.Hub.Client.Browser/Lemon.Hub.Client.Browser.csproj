@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Signing in to the hub from a WebAssembly app: by redirect, the answer read on the next start. -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-browser</TargetFramework>
+    <RootNamespace>Lemon.Hub.Client.Browser</RootNamespace>
+    <!-- JSImport's generated marshalling. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PackageId>Lemon.Hub.Client.Browser</PackageId>
+    <Product>Lemon Hub Client</Product>
+    <Description>Signing in to the Lemon hub from a WebAssembly app, by redirect to the sign-in service and back.</Description>
+    <PackageReadmePath>$(MSBuildThisFileDirectory)..\Lemon.Hub.Client\README.md</PackageReadmePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lemon.Hub.Client\Lemon.Hub.Client.csproj" />
+  </ItemGroup>
+
+</Project>
