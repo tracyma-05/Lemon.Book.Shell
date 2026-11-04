@@ -14,6 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lemon.Book.Shell\Lemon.Book.Shell.csproj" />
+    <!-- The loopback sign-in; LoopbackSignInFlow here gives it the books' page. -->
+    <ProjectReference Include="..\Lemon.Hub.Client.Desktop\Lemon.Hub.Client.Desktop.csproj" />
   </ItemGroup>
 
 </Project>

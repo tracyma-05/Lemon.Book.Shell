@@ -4,6 +4,11 @@ The shell the Lemon books share, as three NuGet packages (`src/Lemon.Book.Shell`
 12 and .NET 10. Extracted from Lemon.Picture.Book; Lemon.English.Book is built on it, and the Picture, Maths and
 Explore books are to move onto it one at a time. Using it and packing it: `README.md`.
 
+Beside it, the hub client (`src/Lemon.Hub.Client`, `.Desktop`, `.Browser`): signing in to the hub (OIDC with PKCE,
+refresh, pluggable session storage) with no Avalonia, so apps that are not books use it too; the shell builds on it.
+Nothing book-specific goes there (no `LocalizationService`, no book's page or words): the shell wraps it instead, as
+`Lemon.Book.Shell.Desktop.LoopbackSignInFlow` does. Its own README: `src/Lemon.Hub.Client/README.md`.
+
 ## Public repository: nothing sensitive, ever
 
 - No credentials, tokens, private host names, internal product names, e-mail addresses or personal data in

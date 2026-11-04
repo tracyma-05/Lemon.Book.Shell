@@ -3,21 +3,38 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace Lemon.Book.Shell.Sync;
+namespace Lemon.Hub.Client;
 
 /// <summary>Sign-in failed or was refused; <see cref="Exception.Message"/> is for the log, not the reader.</summary>
 public sealed class SignInException(string message, bool needsSignIn = false) : Exception(message)
 {
-    /// <summary>The account's sign-in is no longer good (refused refresh): the child has to sign in again.</summary>
+    /// <summary>The account's sign-in is no longer good (refused refresh): the user has to sign in again.</summary>
     public bool NeedsSignIn { get; } = needsSignIn;
 }
 
 /// <summary>
-/// The OpenID Connect pieces the book needs, as a public client: the authorization code flow with PKCE, and refreshing.
+/// The OpenID Connect pieces an app needs, as a public client: the authorization code flow with PKCE, and refreshing.
 /// No client secret (an app cannot keep one); the sign-in page is the sign-in service's own.
 /// </summary>
 public sealed class OidcClient(HttpClient http)
 {
+    /// <summary>
+    /// The hub's anonymous answer to "how does <paramref name="app"/> sign in" (<c>GET api/app/learning/{app}/client</c>
+    /// under <paramref name="hub"/>, its base address ending in /).
+    /// </summary>
+    public static Uri ClientInfoAddress(Uri hub, string app) =>
+        new(hub, $"api/app/learning/{Uri.EscapeDataString(app)}/client");
+
+    /// <summary>Asks the hub (<paramref name="address"/>, see <see cref="ClientInfoAddress"/>) which sign-in service, client and scopes to use.</summary>
+    public async Task<SyncClientInfo> GetClientInfoAsync(Uri address, CancellationToken cancellationToken)
+    {
+        var body = await http.GetStringAsync(address, cancellationToken);
+        var client = JsonSerializer.Deserialize(body, HubJson.Default.SyncClientInfo);
+        return client is { Authority.Length: > 0, ClientId.Length: > 0 }
+            ? client
+            : throw new SignInException("The hub did not say how to sign in.");
+    }
+
     public async Task<(PendingSignIn Pending, Uri AuthorizeUrl)> BeginAsync(
         SyncClientInfo client, Uri redirectUri, DateTime now, CancellationToken cancellationToken)
     {
@@ -120,7 +137,7 @@ public sealed class OidcClient(HttpClient http)
     {
         var address = authority.TrimEnd('/') + "/.well-known/openid-configuration";
         await using var stream = await http.GetStreamAsync(address, cancellationToken);
-        var discovery = await JsonSerializer.DeserializeAsync(stream, SyncJson.Default.OidcDiscovery, cancellationToken);
+        var discovery = await JsonSerializer.DeserializeAsync(stream, HubJson.Default.OidcDiscovery, cancellationToken);
         return discovery is { AuthorizationEndpoint.Length: > 0, TokenEndpoint.Length: > 0 }
             ? discovery
             : throw new SignInException("The sign-in service's discovery document has no endpoints.");
@@ -133,7 +150,7 @@ public sealed class OidcClient(HttpClient http)
         OidcTokenResponse? tokens = null;
         try
         {
-            tokens = JsonSerializer.Deserialize(body, SyncJson.Default.OidcTokenResponse);
+            tokens = JsonSerializer.Deserialize(body, HubJson.Default.OidcTokenResponse);
         }
         catch (JsonException)
         {
@@ -160,7 +177,7 @@ public sealed class OidcClient(HttpClient http)
         {
             var payload = parts[1].Replace('-', '+').Replace('_', '/');
             payload = payload.PadRight(payload.Length + (4 - payload.Length % 4) % 4, '=');
-            return JsonSerializer.Deserialize(Convert.FromBase64String(payload), SyncJson.Default.IdTokenClaims);
+            return JsonSerializer.Deserialize(Convert.FromBase64String(payload), HubJson.Default.IdTokenClaims);
         }
         catch (Exception ex) when (ex is FormatException or JsonException)
         {

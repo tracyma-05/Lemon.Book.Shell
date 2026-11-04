@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Signing in to the hub from a Windows, macOS or Linux app: the system browser and a loopback listener (RFC 8252). -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Lemon.Hub.Client.Desktop</RootNamespace>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PackageId>Lemon.Hub.Client.Desktop</PackageId>
+    <Product>Lemon Hub Client</Product>
+    <Description>Signing in to the Lemon hub from a desktop app: the system browser, and the answer on a loopback port.</Description>
+    <PackageReadmePath>$(MSBuildThisFileDirectory)..\Lemon.Hub.Client\README.md</PackageReadmePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Lemon.Hub.Client.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lemon.Hub.Client\Lemon.Hub.Client.csproj" />
+  </ItemGroup>
+
+</Project>

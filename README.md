@@ -11,6 +11,14 @@ everything around them.
 | `Lemon.Book.Shell.Desktop` | Narration players for Windows (Media Foundation, MCI) and macOS, and signing in through the system browser |
 | `Lemon.Book.Shell.Browser` | Narration through Web Audio, settings in `localStorage`, sign-in by redirect, and the page's scripts (`download-progress.js`, `wake-lock.js`, `narration.js`) |
 
+Signing in itself is in the hub client, three packages of its own with no Avalonia (`src/Lemon.Hub.Client`,
+`.Desktop`, `.Browser`; see [its README](src/Lemon.Hub.Client/README.md)), which the shell depends on and apps that
+are not books use directly. Since 0.2.0 the sign-in types live there (`Lemon.Hub.Client`: `ISignInFlow`,
+`OidcClient`, `AccountSession`, `SignInException`; `Lemon.Hub.Client.Browser.RedirectSignInFlow`). The shell's packages
+add those namespaces as global usings to the book (`buildTransitive`, with `ImplicitUsings`), so a book's code compiles
+unchanged; `Lemon.Book.Shell.Desktop.LoopbackSignInFlow` stays, with the books' page. A book keeps the session
+somewhere else by passing an `ISessionStore` to `SyncService` (by default it stays in the book's settings, as before).
+
 ## Using it in a book
 
 At start, before anything reads the settings (the book's `App`, and its tests):

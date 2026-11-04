@@ -1,0 +1,10 @@
+<Project>
+  <!--
+    Imported into every project that takes the shell. The sign-in types (ISignInFlow, OidcClient, AccountSession,
+    SignInException…) moved to Lemon.Hub.Client in 0.2.0; this keeps a book that names them under its
+    `using Lemon.Book.Shell.Sync;` compiling unchanged. Needs ImplicitUsings, as the books have.
+  -->
+  <ItemGroup>
+    <Using Include="Lemon.Hub.Client" />
+  </ItemGroup>
+</Project>

@@ -14,6 +14,7 @@ using Lemon.Book.Shell.Contents;
 using Lemon.Book.Shell.Infrastructures.Settings;
 using Lemon.Pet.Look;
 using Lemon.Book.Shell.Sync;
+using Lemon.Hub.Client;
 using Xunit;
 
 namespace Lemon.Book.Shell.Tests;
@@ -251,6 +252,28 @@ public sealed class SyncTests
         Assert.Equal(SyncState.SignedOut, device.State);
         Assert.Equal("g1", store.Get(SettingKeys.Games));
         Assert.Null(store.Inner.Get(SyncService.SessionKey));
+    }
+
+    [Fact]
+    public async Task A_book_can_keep_the_session_in_its_own_store()
+    {
+        var server = new FakeSyncServer();
+        var store = new SyncedSettingsStore(new MemorySettingsStore(), () => T0);
+        var sessions = new MemorySessionStore();
+        var device = new SyncService(store, Server, new FakeFlow(), new HttpClient(server), () => T0, sessions);
+
+        await device.SignInAsync();
+
+        Assert.Equal(SyncState.Synced, device.State);
+        Assert.Equal(device.Session, sessions.LoadSession());
+        Assert.Null(store.Inner.Get(SyncService.SessionKey));
+
+        // A new start over the same stores is still signed in.
+        var again = new SyncService(store, Server, new FakeFlow(), new HttpClient(server), () => T0, sessions);
+        Assert.True(again.IsSignedIn);
+
+        again.SignOut();
+        Assert.Null(sessions.LoadSession());
     }
 
     // ---------------------------------------------------------------- a parent's children

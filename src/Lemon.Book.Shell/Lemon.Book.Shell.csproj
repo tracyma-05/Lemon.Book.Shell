@@ -20,6 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Signing in to the hub (OidcClient, ISignInFlow, the session), shared with apps that are not books. -->
+    <ProjectReference Include="..\Lemon.Hub.Client\Lemon.Hub.Client.csproj" />
+    <!-- Keeps books that name the sign-in types under `using Lemon.Book.Shell.Sync;` compiling (see the file). -->
+    <None Include="buildTransitive\*.props" Pack="true" PackagePath="buildTransitive\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia" />
     <PackageReference Include="Avalonia.Themes.Fluent" />
     <PackageReference Include="CommunityToolkit.Mvvm" />

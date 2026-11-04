@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Signing in to the hub as a public client (OpenID Connect, authorization code with PKCE), keeping the session and
+    refreshing it. No UI and no Avalonia: any app can use it, a book or not. The heads' sign-in flows are in
+    Lemon.Hub.Client.Desktop (system browser and a loopback listener) and Lemon.Hub.Client.Browser (redirect).
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Lemon.Hub.Client</RootNamespace>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PackageId>Lemon.Hub.Client</PackageId>
+    <Product>Lemon Hub Client</Product>
+    <Description>Signing in to the Lemon hub as a public OpenID Connect client (authorization code with PKCE), with refresh and pluggable session storage. No UI dependency.</Description>
+    <PackageReadmePath>$(MSBuildThisFileDirectory)README.md</PackageReadmePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Lemon.Hub.Client.Tests" />
+  </ItemGroup>
+
+</Project>

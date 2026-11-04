@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Lemon.Book.Shell.Infrastructures.Localization;
 using Lemon.Book.Shell.Sync;
+using Lemon.Hub.Client;
 
 namespace Lemon.Book.Shell.ViewModels;
 

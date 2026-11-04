@@ -38,7 +38,11 @@ jobs:
         with:
           global-json-file: global.json
       - run: dotnet workload install wasm-tools
+      - run: dotnet test tests/Lemon.Hub.Client.Tests -c Release
       - run: dotnet test tests/Lemon.Book.Shell.Tests -c Release
+      - run: dotnet pack src/Lemon.Hub.Client -c Release -o artifacts/packages
+      - run: dotnet pack src/Lemon.Hub.Client.Desktop -c Release -o artifacts/packages
+      - run: dotnet pack src/Lemon.Hub.Client.Browser -c Release -o artifacts/packages
       - run: dotnet pack src/Lemon.Book.Shell -c Release -o artifacts/packages
       - run: dotnet pack src/Lemon.Book.Shell.Desktop -c Release -o artifacts/packages
       - run: dotnet pack src/Lemon.Book.Shell.Browser -c Release -o artifacts/packages
