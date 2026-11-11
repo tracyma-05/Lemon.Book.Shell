@@ -3,7 +3,7 @@
   <!-- Signing in to the hub from a WebAssembly app: by redirect, the answer read on the next start. -->
 
   <PropertyGroup>
-    <TargetFramework>net10.0-browser</TargetFramework>
+    <TargetFramework>net11.0-browser</TargetFramework>
     <RootNamespace>Lemon.Hub.Client.Browser</RootNamespace>
     <!-- JSImport's generated marshalling. -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

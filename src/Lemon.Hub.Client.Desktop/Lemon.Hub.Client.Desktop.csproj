@@ -3,7 +3,7 @@
   <!-- Signing in to the hub from a Windows, macOS or Linux app: the system browser and a loopback listener (RFC 8252). -->
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net11.0</TargetFramework>
     <RootNamespace>Lemon.Hub.Client.Desktop</RootNamespace>
     <IsAotCompatible>true</IsAotCompatible>
     <PackageId>Lemon.Hub.Client.Desktop</PackageId>

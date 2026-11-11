@@ -1,6 +1,6 @@
 # Lemon.Hub.Client
 
-Signing in to the Lemon hub from any .NET 10 app, as a public OpenID Connect client: the authorization code flow
+Signing in to the Lemon hub from any .NET 11 app, as a public OpenID Connect client: the authorization code flow
 with PKCE, no client secret, refresh tokens, and session storage the app chooses. No UI and no Avalonia; AOT- and
 trim-safe. The Lemon books get it through Lemon.Book.Shell; other apps take it on its own.
 

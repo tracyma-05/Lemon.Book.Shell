@@ -1,7 +1,7 @@
 <Project>
   <!--
-    Imported into every project that takes the shell's web pieces (a .targets: the Razor SDK writes the package's
-    .props for its static web assets). RedirectSignInFlow moved to Lemon.Hub.Client.Browser in 0.2.0; this keeps a
+    Imported into every project that takes the shell's web pieces (a .props: since .NET 11 the Razor SDK writes the
+    package's .targets for its static web assets). RedirectSignInFlow moved to Lemon.Hub.Client.Browser in 0.2.0; this keeps a
     book's `new RedirectSignInFlow()` under its `using Lemon.Book.Shell.Browser;` compiling unchanged. Needs
     ImplicitUsings, as the books have.
   -->

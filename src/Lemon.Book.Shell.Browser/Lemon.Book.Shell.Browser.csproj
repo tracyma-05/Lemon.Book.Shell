@@ -7,7 +7,7 @@
   -->
 
   <PropertyGroup>
-    <TargetFramework>net10.0-browser</TargetFramework>
+    <TargetFramework>net11.0-browser</TargetFramework>
     <RootNamespace>Lemon.Book.Shell.Browser</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsAotCompatible>true</IsAotCompatible>
@@ -24,7 +24,7 @@
     <!-- Sign-in by redirect (RedirectSignInFlow), from the hub client. -->
     <ProjectReference Include="..\Lemon.Hub.Client.Browser\Lemon.Hub.Client.Browser.csproj" />
     <!-- Keeps a book's `new RedirectSignInFlow()` under `using Lemon.Book.Shell.Browser;` compiling (see the file). -->
-    <None Include="buildTransitive\*.targets" Pack="true" PackagePath="buildTransitive\" />
+    <None Include="buildTransitive\*.props" Pack="true" PackagePath="buildTransitive\" />
   </ItemGroup>
 
 </Project>

@@ -54,7 +54,7 @@ done
 
 # The books name the sign-in types under their old namespaces: the shell's packages bring the usings that keep that
 # compiling (buildTransitive/).
-for usings in Lemon.Book.Shell/Lemon.Book.Shell.props Lemon.Book.Shell.Browser/Lemon.Book.Shell.Browser.targets; do
+for usings in Lemon.Book.Shell/Lemon.Book.Shell.props Lemon.Book.Shell.Browser/Lemon.Book.Shell.Browser.props; do
     package="${usings%%/*}"
     if ! unzip -l "$OUT/$package.$VERSION.nupkg" | grep -q "buildTransitive/${usings#*/}"; then
         echo "$package.$VERSION.nupkg has no buildTransitive/${usings#*/}." >&2

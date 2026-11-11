@@ -15,7 +15,7 @@
       One version for the six packages (the shell's three and the hub client's three): bump it for every change the
       apps should get (NuGet caches by version).
     -->
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <!-- The README packed as the package's own; the hub client's projects point at theirs. -->
