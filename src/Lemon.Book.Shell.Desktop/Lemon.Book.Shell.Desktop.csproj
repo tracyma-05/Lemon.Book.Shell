@@ -3,7 +3,7 @@
   <!-- What the books' Windows and macOS heads share: the narration players and signing in through the browser. -->
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net11.0</TargetFramework>
     <RootNamespace>Lemon.Book.Shell.Desktop</RootNamespace>
     <!-- The narration players call the operating system through generated P/Invoke. -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

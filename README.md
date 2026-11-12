@@ -1,6 +1,6 @@
 # Lemon.Book.Shell
 
-The shell the Lemon books share (Avalonia 12, .NET 10): an open book with page turning, narration with timed
+The shell the Lemon books share (Avalonia 12, .NET 11): an open book with page turning, narration with timed
 subtitles, lesson walkthroughs, bookmarks and notes, settings, localization, the light, dark and eye-care (护眼)
 themes, updates from GitHub releases, and optional sign-in with sync. A book brings its own pages; the shell brings
 everything around them.

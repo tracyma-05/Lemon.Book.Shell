@@ -97,7 +97,7 @@ public static partial class UpdatePlatform
     public static bool IsFull(string platform) => platform.EndsWith(FullSuffix, StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
-    /// A framework-dependent app runs on the shared install's runtime (<c>…/dotnet/shared/Microsoft.NETCore.App/10.0.x/</c>);
+    /// A framework-dependent app runs on the shared install's runtime (<c>…/dotnet/shared/Microsoft.NETCore.App/11.0.x/</c>);
     /// a self-contained one on the runtime in its own folder (or inside its single-file bundle, with no folder at all).
     /// </summary>
     internal static bool IsSelfContainedRuntime(string? runtimeDirectory, string baseDirectory)
